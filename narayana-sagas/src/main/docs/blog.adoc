@@ -1,0 +1,15 @@
+= Saga implemetations comparison
+Martin Stefanko <xstefank122@gmail.com>
+v1.0, 2017-11-26
+ifndef::imagesdir[:imagesdir: images]
+
+== Saga implemetations comparison
+
+In this previous http://jbossts.blogspot.cz/2017/06/sagas-and-how-they-differ-from-two.html[blog post]
+we have investigated the genaral motions of the https://www.cs.cornell.edu/andru/cs711/2002fa/reading/sagas.pdf[saga pattern]
+and how sagas differ from traditional ACID approach.
+This article will focus on the current state of applicability of
+this pattern. We will introduce, describe and compare three frameworks
+that presently support saga processing, namely Narayana LRA,
+Axon framework and Eventuate.io.
+

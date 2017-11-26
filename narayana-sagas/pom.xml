@@ -57,11 +57,11 @@
                             <backend>pdf</backend>
                             <outputDirectory>${project.build.directory}/generated-docs</outputDirectory>
                             <sourceHighlighter>coderay</sourceHighlighter>
-                            <doctype>book</doctype>
+                            <doctype>article</doctype>
                             <attributes>
                                 <icons>font</icons>
                                 <pagenums/>
-                                <toc/>
+                                <!--<toc/>-->
                                 <idprefix/>
                                 <idseparator>-</idseparator>
                             </attributes>
