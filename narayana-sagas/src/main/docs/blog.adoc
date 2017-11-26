@@ -13,3 +13,19 @@ this pattern. We will introduce, describe and compare three frameworks
 that presently support saga processing, namely Narayana LRA,
 Axon framework and Eventuate.io.
 
+Let me start with a short introduction to the mentioned frameworks.
+
+==== Narayana LRA
+
+Narayana Long running actions is a specification developed by the Narayana team
+in collaboration with the Eclipse MicroProfile initiative. The main focus is to
+introduce an API for coordinating long running activities with the assurance
+of the globally consistent outcome and without any locking mechanisms.
+[\https://github.com/eclipse/microprofile-sandbox/tree/master/proposals/0009-LRA]
+
+=== Comparisons
+
+Even through all of the above frameworks achieve the same outcome there are
+several areas where we can examine how the handling of the saga processing differ.
+
+
