@@ -15,13 +15,39 @@ Axon framework and Eventuate.io.
 
 Let me start with a short introduction to the mentioned frameworks.
 
-==== Narayana LRA
+=== Narayana LRA
 
-Narayana Long running actions is a specification developed by the Narayana team
+Narayana Long Running Actions is a specification developed by the Narayana team
 in collaboration with the Eclipse MicroProfile initiative. The main focus is to
 introduce an API for coordinating long running activities with the assurance
 of the globally consistent outcome and without any locking mechanisms.
+
 [\https://github.com/eclipse/microprofile-sandbox/tree/master/proposals/0009-LRA]
+
+
+=== Axon framework
+
+Axon framework is Java based framework for building
+scalable and highly performant applications. Axon is based on Command Query
+Responsibility Segregation (https://martinfowler.com/bliki/CQRS.html[CQRS])
+pattern. Axon is based on event processing which includes separated Command bus for
+updates and Event bus for queries.
+
+[\http://www.axonframework.org/]
+
+
+=== Eventuate.io
+
+Eventuate is a platform that provides event-driven programming model that focus
+on solving distributed data management in microservices architectures. Similarly
+to the Axon, it is based upon CQRS principles. The platform stores events
+in the MySQL database and it distributes them through the Apache Kafka.
+
+[\http://eventuate.io]
+
+NOTE: CQRS is an architectural pattern that splits the domain model into two separated
+      areas - the first one is responsible for updates and containing business logic
+      while the other taking care of the reads and providing information for the user
 
 === Comparisons
 
