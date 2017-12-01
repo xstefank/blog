@@ -2,6 +2,7 @@
 Martin Stefanko <xstefank122@gmail.com>
 v1.0, 2017-11-26
 ifndef::imagesdir[:imagesdir: images]
+:sourcedir: src/main/java
 
 == Saga implemetations comparison
 
@@ -49,9 +50,21 @@ NOTE: CQRS is an architectural pattern that splits the domain model into two sep
       areas - the first one is responsible for updates and containing business logic
       while the other taking care of the reads and providing information for the user
 
-=== Comparisons
+== Comparisons
 
 Even through all of the above frameworks achieve the same outcome there are
 several areas where we can examine how the handling of the saga processing differ.
 
+
+
+=== Developer friendliness
+
+//TODO
+//The LRA provides for the developer traditional coordinator oriented architecture. Individual
+//participants can join the LRA by the HTTP call to the LRA coordinator, each providing
+
+In the Axon sagas are impleted as aggregates. The aggregate is a logical group of entities
+and value objects that are treated as a single unit. Axon uses special type of event listener
+that allow the developer to associate a value in the events with the current saga so that
+the framework knows which saga should be invoked.
 
