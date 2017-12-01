@@ -68,3 +68,8 @@ and value objects that are treated as a single unit. Axon uses special type of e
 that allow the developer to associate a value in the events with the current saga so that
 the framework knows which saga should be invoked.
 
+By the time of this writing Eventuate come out with a new Saga API which I still need to
+investigate. Before that, the whole saga manipulation was up to the developers implementation.
+footnote:[in the basic approach it is worth noting that Eventuate platform creates
+aggregates by the default constructor calls which causes prolems with DI]
+
