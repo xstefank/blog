@@ -59,17 +59,18 @@ several areas where we can examine how the handling of the saga processing diffe
 
 === Developer friendliness
 
-//TODO
-//The LRA provides for the developer traditional coordinator oriented architecture. Individual
-//participants can join the LRA by the HTTP call to the LRA coordinator, each providing
+The LRA provides for the developer traditional coordinator oriented architecture. Individual
+participants can join the LRA by the HTTP call to the LRA coordinator, each providing methods
+for saga completion and compensation.
 
 In the Axon sagas are impleted as aggregates. The aggregate is a logical group of entities
 and value objects that are treated as a single unit. Axon uses special type of event listener
-that allow the developer to associate a value in the events with the current saga so that
+that allows the developer to associate a value in the events with the current saga so that
 the framework knows which saga should be invoked.
 
 By the time of this writing Eventuate come out with a new Saga API which I still need to
 investigate. Before that, the whole saga manipulation was up to the developers implementation.
 footnote:[in the basic approach it is worth noting that Eventuate platform creates
-aggregates by the default constructor calls which causes prolems with DI]
+aggregates by the default constructor calls which causes prolems with DI] Both Eventuate
+and Axon handle saga completion and compenstation by separate event handlers.
 
