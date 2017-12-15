@@ -14,8 +14,6 @@ this pattern. We will introduce, describe and compare three frameworks
 that presently support saga processing, namely Narayana LRA,
 Axon framework and Eventuate.io.
 
-Let me start with a short introduction to the mentioned frameworks.
-
 === Narayana LRA
 
 Narayana Long Running Actions is a specification developed by the Narayana team
@@ -31,8 +29,8 @@ of the globally consistent outcome and without any locking mechanisms.
 Axon framework is Java based framework for building
 scalable and highly performant applications. Axon is based on Command Query
 Responsibility Segregation (https://martinfowler.com/bliki/CQRS.html[CQRS])
-pattern. Axon is based on event processing which includes separated Command bus for
-updates and Event bus for queries.
+pattern. The main motion is the event processing which includes separated Command bus
+for updates and Event bus for queries.
 
 [\http://www.axonframework.org/]
 
@@ -41,14 +39,14 @@ updates and Event bus for queries.
 
 Eventuate is a platform that provides event-driven programming model that focus
 on solving distributed data management in microservices architectures. Similarly
-to the Axon, it is based upon CQRS principles. The platform stores events
-in the MySQL database and it distributes them through the Apache Kafka.
+to the Axon, it is based upon CQRS principles. The framework stores events
+in the MySQL database and it distributes them through the Apache Kafka plarform.
 
 [\http://eventuate.io]
 
 NOTE: CQRS is an architectural pattern that splits the domain model into two separated
       areas - the first one is responsible for updates and containing business logic
-      while the other taking care of the reads and providing information for the user
+      while the other is taking care of the reads and providing information for the user
 
 == Comparisons
 
