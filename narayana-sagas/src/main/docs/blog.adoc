@@ -81,10 +81,16 @@ initiator. Initiating service is able to invoke participants on the provided end
 which allows participant to join the LRA context. The participant can specify whether to
 join, create new or ignore the corresponding LRA context by the CDI annotation.
 
+Axon provides a set of annotation the denote the saga class. A @Saga annotation defines
+the class as a saga aggregate which allows it do declare a saga event handlers. Saga
+handler can optionally include the name of the property in the incoming event which
+has been previously associated with the saga. Additionally Axon provides special annotations
+to mark the start and stop of the saga.
 
-
-The developer is able to specify saga definition including
-participant invocation, compensation and reply handlers.
+In Eventuate the developer is able to specify the saga definition including the participant
+invocation, compensation and reply handlers by the saga definition. It provides a simple
+builder which constructs the saga step by step providing the handlers for command and event
+ processing.
 
 === Failure recovery
 
