@@ -100,11 +100,22 @@ cancels the LRA, the coordinator is able to call the compensation endpoints of t
 participants.
 
 In Axon application developers need to know which events represents the failure. Also the
-tracking of the progress as well as of the compensation is handled by the developer.
+tracking of the progress as well as the one of the compensation is handled by the
+developer.
 
 Eventuate registers the compensation handlers in the saga definitions. Participants are
 allowed to send a special command which indicates failure a therefore the compensation of
 the previous actions.
+
+=== Ordering of invocations
+
+LRA and Eventuate invoke each participant in strict order. This approach expects the
+actions to be dependent on each prior action so the compensations are called in reverse
+order. footnote:[Narayana LRA allows participants to modigy this behavior by returning
+HTTP 202 Accepted]
+
+Axon on the contrary does not control the ordering of invocations so the programmer is
+allowed to send the compensation commands in any desired ordering.
 
 === Structure
 
@@ -123,7 +134,9 @@ A participant failure is treated by the custom timeout on the saga invocation af
 the coordinator cancels the saga.
 
 
-=== Blocking and synchronization
+
+
+
 
 
 
