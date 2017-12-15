@@ -57,18 +57,42 @@ several areas where we can examine how the handling of the saga processing diffe
 
 === Developer friendliness
 
-The LRA provides for the developer traditional coordinator oriented architecture. Individual
-participants can join the LRA by the HTTP call to the LRA coordinator, each providing methods
-for saga completion and compensation.
+The LRA provides for the developer traditional coordinator oriented architecture.
+Individual participants can join the LRA by the HTTP call to the LRA coordinator, each
+providing methods for saga completion and compensation. Narayana provides a LRA client
+which makes the REST invocations transparent.
 
-In the Axon sagas are impleted as aggregates. The aggregate is a logical group of entities
-and value objects that are treated as a single unit. Axon uses special type of event listener
-that allows the developer to associate a value in the events with the current saga so that
-the framework knows which saga should be invoked.
+In the Axon sagas are implemented as aggregates. The aggregate is a logical group of
+entities and value objects that are treated as a single unit. Axon uses special type of
+event listener that allows the developer to associate a property in the events with
+the current saga so that the framework knows which saga should be invoked. The invocation
+and compensation are executed by separated event handler and therefore a different events.
 
-By the time of this writing Eventuate come out with a new Saga API which I still need to
-investigate. Before that, the whole saga manipulation was up to the developers implementation.
-footnote:[in the basic approach it is worth noting that Eventuate platform creates
-aggregates by the default constructor calls which causes prolems with DI] Both Eventuate
-and Axon handle saga completion and compenstation by separate event handlers.
+Not a long ago Eventuate presented a new API called Eventuate Tram which handles the saga
+processing for the platform. It enables applications to send messages as a part of
+an database transaction. The platform provides abstractions for messaging in form of named
+channels, events as subscriptions to domain events and commands for asynchronous
+communication.
+
+==== Saga specifications
+
+In the LRA the specification of how the saga should be performed is specified at the
+initiator. Initiating service is able to invoke participants on the provided endpoints
+which allows participant to join the LRA context. The participant can specify whether to
+join, create new or ignore the corresponding LRA context by the CDI annotation.
+
+
+
+The developer is able to specify saga definition including
+participant invocation, compensation and reply handlers.
+
+=== Failure recovery
+
+=== Structure
+
+=== Blocking and synchronization
+
+=== Idempotency
+
+
 
