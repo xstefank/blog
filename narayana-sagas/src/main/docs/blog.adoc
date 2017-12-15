@@ -108,9 +108,23 @@ the previous actions.
 
 === Structure
 
+As Axon and Eventuate are primarily CQRS frameworks they require some additional handling.
+In Axon saga is still an aggregate which means that it consumes events and produces commands.
+This may be an unwanted overhead when the application does not follow CQRS domain pattern.
+The same applies to Eventuate Tram but as the communication is shadowed through the
+messaging channels it does not force the programmer to follow CQRS principles. Both
+platforms mark every event and command into the distributed event log which warrants the
+saga completion upon the system failure and the eventual consistency.
+
+The LRA on the other hand requires only to implement processing and compensation endpoints.
+Processing is then handled by the LRA coordinator and it is made transparent to the end
+users. The failures of the coordinator can be managed by replication and/or transaction log.
+A participant failure is treated by the custom timeout on the saga invocation after which
+the coordinator cancels the saga.
+
+
 === Blocking and synchronization
 
-=== Idempotency
 
 
 
