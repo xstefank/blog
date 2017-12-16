@@ -133,6 +133,17 @@ users. The failures of the coordinator can be managed by replication and/or tran
 A participant failure is treated by the custom timeout on the saga invocation after which
 the coordinator cancels the saga.
 
+== References
+
+As a part of my thesis I have created a basic example in all of the discussed frameworks. It
+is a simple order saga containing requests for shipment and invoice computation invoked
+on different services.
+
+* https://github.com/xstefank/axon-service
+* https://github.com/xstefank/eventuate-service - pure CQRS solution
+* https://github.com/xstefank/lra-service
+* https://github.com/xstefank/eventuate-sagas - Eventuate Tram
+
 
 
 
