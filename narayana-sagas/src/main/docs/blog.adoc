@@ -1,23 +1,21 @@
-= Saga implemetations comparison
+= Saga implementations comparison
 Martin Stefanko <xstefank122@gmail.com>
 v1.0, 2017-11-26
 ifndef::imagesdir[:imagesdir: images]
 :sourcedir: src/main/java
 
-== Saga implemetations comparison
-
-In this previous http://jbossts.blogspot.cz/2017/06/sagas-and-how-they-differ-from-two.html[blog post]
-we have investigated the genaral motions of the https://www.cs.cornell.edu/andru/cs711/2002fa/reading/sagas.pdf[saga pattern]
+In the previous http://jbossts.blogspot.cz/2017/06/sagas-and-how-they-differ-from-two.html[blog post]
+we have investigated the general motions of the https://www.cs.cornell.edu/andru/cs711/2002fa/reading/sagas.pdf[saga pattern]
 and how sagas differ from traditional ACID approach.
 This article will focus on the current state of applicability of
-this pattern. We will introduce, describe and compare three frameworks
+this pattern. We will introduce and compare three frameworks
 that presently support saga processing, namely Narayana LRA,
 Axon framework and Eventuate.io.
 
 === Narayana LRA
 
 Narayana Long Running Actions is a specification developed by the Narayana team
-in collaboration with the Eclipse MicroProfile initiative. The main focus is to
+in the collaboration with the Eclipse MicroProfile initiative. The main focus is to
 introduce an API for coordinating long running activities with the assurance
 of the globally consistent outcome and without any locking mechanisms.
 
@@ -27,25 +25,25 @@ of the globally consistent outcome and without any locking mechanisms.
 === Axon framework
 
 Axon framework is Java based framework for building
-scalable and highly performant applications. Axon is based on Command Query
+scalable and highly performant applications. Axon is based on the Command Query
 Responsibility Segregation (https://martinfowler.com/bliki/CQRS.html[CQRS])
-pattern. The main motion is the event processing which includes separated Command bus
-for updates and Event bus for queries.
+pattern. The main motion is the event processing which includes the separated Command bus
+for updates and the Event bus for queries.
 
 [\http://www.axonframework.org/]
 
 
 === Eventuate.io
 
-Eventuate is a platform that provides event-driven programming model that focus
+Eventuate is a platform that provides an event-driven programming model that focus
 on solving distributed data management in microservices architectures. Similarly
 to the Axon, it is based upon CQRS principles. The framework stores events
-in the MySQL database and it distributes them through the Apache Kafka plarform.
+in the MySQL database and it distributes them through the Apache Kafka platform.
 
 [\http://eventuate.io]
 
 NOTE: CQRS is an architectural pattern that splits the domain model into two separated
-      areas - the first one is responsible for updates and containing business logic
+      areas - the first one is responsible for updates and the containing business logic
       while the other is taking care of the reads and providing information for the user
 
 == Comparisons
@@ -57,7 +55,7 @@ several areas where we can examine how the handling of the saga processing diffe
 
 === Developer friendliness
 
-The LRA provides for the developer traditional coordinator oriented architecture.
+The LRA provides for the developer the traditional coordinator oriented architecture.
 Individual participants can join the LRA by the HTTP call to the LRA coordinator, each
 providing methods for saga completion and compensation. Narayana provides a LRA client
 which makes the REST invocations transparent.
@@ -66,78 +64,79 @@ In the Axon sagas are implemented as aggregates. The aggregate is a logical grou
 entities and value objects that are treated as a single unit. Axon uses special type of
 event listener that allows the developer to associate a property in the events with
 the current saga so that the framework knows which saga should be invoked. The invocation
-and compensation are executed by separated event handler and therefore a different events.
+and compensation are executed by separated event handlers and therefore different events.
 
-Not a long ago Eventuate presented a new API called Eventuate Tram which handles the saga
-processing for the platform. It enables applications to send messages as a part of
-an database transaction. The platform provides abstractions for messaging in form of named
-channels, events as subscriptions to domain events and commands for asynchronous
-communication.
+Not a long ago Eventuate presented a new API called
+https://github.com/eventuate-tram/eventuate-tram-core[Eventuate Tram] which handles
+the saga processing for the platform. It enables applications to send messages as
+a part of an database transaction. The platform provides abstractions for messaging in
+form of named channels, events as subscriptions to domain events and commands for
+asynchronous communication.
 
-==== Saga specifications
+=== Saga specifications
 
-In the LRA the specification of how the saga should be performed is specified at the
+In the LRA the specification of how the saga should be performed is specified by the
 initiator. Initiating service is able to invoke participants on the provided endpoints
 which allows participant to join the LRA context. The participant can specify whether to
 join, create new or ignore the corresponding LRA context by the CDI annotation.
 
-Axon provides a set of annotation the denote the saga class. A @Saga annotation defines
-the class as a saga aggregate which allows it do declare a saga event handlers. Saga
+Axon provides a set of annotation the denote the saga class. A `@Saga` annotation defines
+the class as a saga aggregate which allows it to declare a saga event handlers. Saga
 handler can optionally include the name of the property in the incoming event which
-has been previously associated with the saga. Additionally Axon provides special annotations
-to mark the start and stop of the saga.
+has been previously associated with the saga. Additionally Axon provides special
+annotations to mark the start and end of the saga.
 
 In Eventuate the developer is able to specify the saga definition including the participant
-invocation, compensation and reply handlers by the saga definition. It provides a simple
+invocations, compensations and reply handlers in the saga definition. It provides a simple
 builder which constructs the saga step by step providing the handlers for command and event
  processing.
 
-=== Failure recovery
+=== Failure handling
 
-The saga compensating actions are in the LRA defined as a designated endpoints. The
-participants registers with the LRA with its base address. If the initiating service then
-cancels the LRA, the coordinator is able to call the compensation endpoints of the included
-participants.
+The saga compensating actions are in the LRA defined as designated endpoints. If the
+initiating service cancels the LRA, the coordinator is able to call the compensation
+endpoints of the included participants.
 
-In Axon application developers need to know which events represents the failure. Also the
-tracking of the progress as well as the one of the compensation is handled by the
-developer.
+In Axon application developers need to know which events represents the failure to provide
+the correct event listeners. Also the tracking of the progress of the execution as well as
+the one of the compensation is operated by the developer.
 
 Eventuate registers the compensation handlers in the saga definitions. Participants are
-allowed to send a special command which indicates failure a therefore the compensation of
-the previous actions.
+allowed to send a special build-in command which indicates failure a therefore the
+compensation of the previous actions.
 
 === Ordering of invocations
 
 LRA and Eventuate invoke each participant in strict order. This approach expects the
 actions to be dependent on each prior action so the compensations are called in reverse
-order. footnote:[Narayana LRA allows participants to modigy this behavior by returning
+order. footnote:[Narayana LRA allows participants to modify this behavior by returning
 HTTP 202 Accepted]
 
 Axon on the contrary does not control the ordering of invocations so the programmer is
 allowed to send the compensation commands in any desired ordering.
 
-=== Structure
+=== Structure and failure recovery
 
-As Axon and Eventuate are primarily CQRS frameworks they require some additional handling.
-In Axon saga is still an aggregate which means that it consumes events and produces commands.
-This may be an unwanted overhead when the application does not follow CQRS domain pattern.
-The same applies to Eventuate Tram but as the communication is shadowed through the
-messaging channels it does not force the programmer to follow CQRS principles. Both
-platforms mark every event and command into the distributed event log which warrants the
-saga completion upon the system failure and the eventual consistency.
+As Axon and Eventuate are primarily CQRS based frameworks they require some additional
+handling for the saga execution. In Axon saga is still the aggregate which means that
+it consumes commands and produces events. This may be an unwanted overhead when the
+application does not follow the CQRS domain pattern. The same applies to Eventuate
+Tram but as the communication is shadowed through the messaging channels it does not
+force the programmer to follow CQRS. Both platforms mark every event and command into
+the distributed event log which warrants the saga completion upon the system failure
+with the eventual consistency.
 
 The LRA on the other hand requires only to implement processing and compensation endpoints.
 Processing is then handled by the LRA coordinator and it is made transparent to the end
-users. The failures of the coordinator can be managed by replication and/or transaction log.
-A participant failure is treated by the custom timeout on the saga invocation after which
-the coordinator cancels the saga.
+users. The failures of the coordinator can be managed by replication and/or transaction
+log. A participant failure is treated by the custom timeout on the saga invocation after
+which the coordinator cancels the saga.
 
 == References
 
-As a part of my thesis I have created a basic example in all of the discussed frameworks. It
-is a simple order saga containing requests for shipment and invoice computation invoked
-on different services.
+As a part of my thesis I have created a basic example in all of the discussed frameworks.
+It is a simple ordering saga containing requests for shipment and invoice computation
+invoked on different services.
 
 * https://github.com/xstefank/axon-service
 * https://github.com/xstefank/eventuate-service - pure CQRS solution
