@@ -43,7 +43,7 @@ in the MySQL database and it distributes them through the Apache Kafka platform.
 [\http://eventuate.io]
 
 NOTE: CQRS is an architectural pattern that splits the domain model into two separated
-      areas - the first one is responsible for updates and the containing business logic
+      models - the first one is responsible for updates and the containing business logic
       while the other is taking care of the reads and providing information for the user
 
 == Comparisons
