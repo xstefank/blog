@@ -48,7 +48,7 @@ NOTE: CQRS is an architectural pattern that splits the domain model into two sep
 
 == Comparisons
 
-Even through all of the above frameworks achieve the same outcome there are
+Even though all of the above frameworks achieve the same outcome, there are
 several areas where we can examine how the handling of the saga processing differ.
 
 
