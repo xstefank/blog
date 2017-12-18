@@ -132,11 +132,14 @@ users. The failures of the coordinator can be managed by replication and/or tran
 log. A participant failure is treated by the custom timeout on the saga invocation after
 which the coordinator cancels the saga.
 
-== References
+== Conclusion
 
-As a part of my thesis I have created a basic example in all of the discussed frameworks.
+As we have shown all three frameworks are production ready saga implementations. We have
+discussed the main advantages and drawbacks of each platform respectively. As a part of
+my thesis I have created a basic example in all of the discussed frameworks.
 It is a simple ordering saga containing requests for shipment and invoice computation
-invoked on different services.
+invoked on different services. In the next blog post I plan to describe the execution of
+this saga in every framework to discuss the main distinctions in grater detail.
 
 * https://github.com/xstefank/axon-service
 * https://github.com/xstefank/eventuate-service - pure CQRS solution
