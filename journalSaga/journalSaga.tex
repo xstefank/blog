@@ -82,7 +82,7 @@ Environment (temp title)}
 \end{abstract}
 
 \begin{keyword}
-saga, compensating transactions, reactive, microservices
+transactions, saga, compensating transactions, reactive, microservices, distributed system
 \end{keyword}
 
 \end{frontmatter}
@@ -90,6 +90,14 @@ saga, compensating transactions, reactive, microservices
 %\linenumbers
 
 \section{Introduction}
+
+Transaction processing is widely recognized as a critical technology for modern applications \cite{java_tran_processing}. Particularly in the distributed environment, the comprehension and the achievement of these requirements, based on the currently available technology stack, represents a considerably complex programming task.
+
+Microservices architectural pattern defines a sophisticated development technique which separates the application domain into a set of isolated services that collaborate together to model various business concepts \cite{building_ms}. Due to their distributed character, microservices applications are often inclined to many issues associated with the failure processing and the isolated development model. To ensure that the system is able to function even in a degraded state, these applications commonly provide a design that guarantees certain quality properties which are defined in the Reactive Manifesto \cite{reactive_manifesto} as the reactive systems. The four recognized attributes of reactive microservices systems are responsiveness, resilience, elasticity and the asynchronous message passing.
+
+These characteristics naturally extend to the application of the transaction processing in a reactive environment. As transactions may presumably span multiple services while still providing ACID (Atomicity, Consistency, Isolation, Durability) guarantees, it is required that all impacted participants reach a shared uniform consensus on the transaction result. This consensus is achieved through the utilization of consensus protocols represented conventionally by the Two-phase commit protocol (2PC). However, due to their commonly locking nature, these protocols may present difficulties with the achievement of properties reactive systems need to provide.
+
+The saga pattern \cite{sagas_publ} represents an alternative approach to transaction processing applicable for long living transactions. In a long running transaction, traditional consensus protocols may hold locks on resources for long time periods which is not acceptable in a reactive environment. The saga addresses this problem by allowing participants to commit their intermediate states as local operations. Each operation is required to define a compensation action that can semantically undo the performed operation. The pattern guarantees that either all operations are completed successfully, or the compensation actions are executed for each performed operation to amend the partial processing.
 
  
 \section{Background}
@@ -121,7 +129,8 @@ saga, compensating transactions, reactive, microservices
 
 
 \section{Conclusion} 
-% \section*{References}
-% \bibliography{mybibfile}
+
+\section*{References}
+\bibliography{references.bib}
 
 \end{document}
