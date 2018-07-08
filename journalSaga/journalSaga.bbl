@@ -22,4 +22,10 @@ H.~Garcia-Molina, K.~Salem, Sagas, ACM SIGMOD Record 16~(3) (1987) 249--259.
 \newblock \href {http://dx.doi.org/10.1145/38714.38742}
   {\path{doi:10.1145/38714.38742}}.
 
+\bibitem{haerder_reuter_1983}
+T.~Haerder, A.~Reuter, Principles of transaction-oriented database recovery,
+  ACM Computing Surveys 15~(4) (1983) 287--317.
+\newblock \href {http://dx.doi.org/10.1145/289.291}
+  {\path{doi:10.1145/289.291}}.
+
 \end{thebibliography}
