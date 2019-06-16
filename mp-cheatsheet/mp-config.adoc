@@ -1,8 +1,12 @@
-= MicroProfile Config 
+= MicroProfile Config
 :experimental: true
 :product-name: MicroProfile Config
 
 This cheat sheet covers the basics of MicroProfile Config specification uses.
+
+== Injecting configuration properties
+
+Inject a simple ConfigProperty
 
 [source,java]
 ----
@@ -10,7 +14,8 @@ This cheat sheet covers the basics of MicroProfile Config specification uses.
 @ConfigProperty(name = "my.custom.message") 
 String customMessage;
 ---- 
-Inject simple configuration value.
+
+Inject a ConfigProperty with a default value
 
 [source,java]
 ----
@@ -18,7 +23,6 @@ Inject simple configuration value.
 @ConfigProperty(name = "my.custom.message", defaultValue="My message") 
 String customMessage;
 ---- 
-Inject configuration with default value.
 
 .Required values if no default value is provided
 ****
@@ -27,45 +31,47 @@ Inject configuration with default value.
 `Provider<base_type>`:: deployment exception but the value is reloaded with every access
 ****
 
+== Using injected configuration properties
+
 [source,java]
 ----
 @Inject 
 Config config;
 ---- 
-`getValue(String, Class<T)`:: get single value with specified type
+`getValue(String, Class<T>)`:: get single value with specified type
 `getOptionalValue(String, Class<T>)`:: get value as optional
 `getPropertyNames()`:: get iterable with names of all found properties
 `getConfigSources()`:: get all config sources
 
 NOTE: there is also an option for programatic lookup with `ConfigProvider.getConfig()`
 
-==== Config sources
+== Config sources
 
-===== Default config sources
+=== Default config sources
 
 `System properties`:: ordinal 400
 `Environment properties`:: ordinal 300
 `META-INF/microprofile-config.properties`:: ordinal 100
 
-===== Custom config sources
+=== Custom config sources
 
 implementations of `org.eclipse.microprofile.config.spi.ConfigSource`:: 
 registration in `/META-INF/services/org.eclipse.microprofile.config.spi.ConfigSource`
 
 implementations of `org.eclipse.microprofile.config.spi.ConfigSourceProvider`::
-registration in `ETA-INF/services/org.eclipse.microprofile.config.spi.ConfigSourceProvider`
+registration in `/META-INF/services/org.eclipse.microprofile.config.spi.ConfigSourceProvider`
 
-==== Converters
+== Converters
 
-===== Default converters
+=== Default converters
 
 `Boolean`, `Byte`, `Short`, `Integer`, `Long`, `Float`, `Double`, `Character`, `Class`::
 in both boxed and unboxed variants
 
 `array`, `List`, `Set`::
-parametrized by the base types
+parameterized by the base types
 
-===== Custom converters
+=== Custom converters
 
 implementations of `org.eclipse.microprofile.config.spi.Converter`::
 registration in `/META-INF/services/org.eclipse.microprofile.config.spi.Converter`
