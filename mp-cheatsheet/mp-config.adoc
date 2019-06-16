@@ -1,10 +1,8 @@
-= MicroProfile basics
+= MicroProfile Config 
 :experimental: true
-:product-name: MicroProfile
+:product-name: MicroProfile Config
 
-This cheat sheet covers the basics of individual MicroProfile specifications uses.
-
-== MicroProfile Config
+This cheat sheet covers the basics of MicroProfile Config specification uses.
 
 [source,java]
 ----
