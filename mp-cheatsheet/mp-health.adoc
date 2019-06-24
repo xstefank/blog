@@ -1,0 +1,46 @@
+= MicroProfile Health
+:experimental: true
+:product-name: MicroProfile Health
+
+This cheat sheet covers the basics of MicroProfile Health specification uses.
+
+== Defining a health check
+
+1. implement `org.eclipse.microprofile.health.HealthCheck` interface
+2. mark the implementation a as CDI bean (e.g. `@ApplicationScoped`)
+3. mark the implementation with one or more of the defined health qualifiers (@Readiness, @Liveness, @Health)
+3. implement the `call()` method
+
+== Different kinds of healh checks
+
+=== Readiness health check
+
+Allows third party services to know if the application is ready to process requests or not.
+
+Qualifier::`@Readiness`
+
+Endpoint::`/health/ready'
+
+
+=== Liveness health check
+
+Allows third party services to determine if the application is running. Failure means that application 
+can be discarded.
+
+Qualifier::`@Liveness`
+
+Endpoint::`/health/live`
+
+
+=== Backward compatible health check
+
+WARNING: This kind of health check is currently depracated and will be removed in the future version of the specification.
+
+Qualifier::`@Health`
+
+Endpoint::`/health`
+
+NOTE: The `/health` endpoint aggregates all defined procedures (defined with `@Health`, `@Liveness`, `@Readiness`). 
+
+NOTE: Multiple kinds of health check can be combined on a single health check procedure.
+
