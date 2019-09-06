@@ -1,0 +1,19 @@
+= Introduction
+
+A lot of people around me have been asking me to set up my personal blog for quite some time now. So I am really glad that I can finally announce that I've managed to get it started!
+
+My name is Martin Štefanko (pronounced as Shtefaanko) but I am also known by my public nickname xstefank (https://github.com/xstefank[GitHub], https://twitter.com/xstefank[Twitter]). I am working as a software engineer at https://www.redhat.com/en[Red Hat]. My personal areas of interest are mainly microservices, Java, MicroProfile and Jakarta EE.
+
+In Red Hat, I am a part of the middleware sustaining engineering team. This allows me to work on the technologies like application servers (WildFly, JBoss EAP) as well as on Red Hat's more microservices oriented portfolio like Quarkus, Thorntail or SmallRye, and in the end on all of other interesting projects contained in the Red Hat's middleware that present the individual parts that are contained in both application servers and microservices runtimes mentioned above (e.g. RESTEasy, Weld, Hibernate, Narayana).
+
+My main focus is in a microservices architecture. In particular, in Java-based microservices. I am an active contributor to the Eclipse MicroProfile project mostly active in the area of distributed transactions called MicroProfile Long Running Actions (LRA)  and MicroProfile Health. I am also interested in and I am starting contributing to Eclipse Jakarta EE (Enterprise Edition) project with focus probably again mainly in transactions. 
+
+So that would be in short about my work. In my non-work time, I like to focus on my family and my hobbies (weightlifting, reading, video games).
+
+==== What will this blog be about?
+
+There is no clear answer to this question. Probably the closest answer is - about anything that I will be working on at the moment. As all of my work is open source there is no issue in sharing my experiences on practical examples, describing problems that I am running into and explaining implemented solutions.
+
+However, I will focus mostly on the modern development of microservices and technologies that can be utilized for microservices systems. This will include runtimes, platforms, frameworks and other kinds of technologies that can help with microservices implementations. This covers, for example, MicroProfile, Quarkus, Spring Boot, reactive systems, WildFly or Jakarta EE.
+
+I hope this short article gives you the idea of what to expect from this blog. If you have any questions or you are interested in any particular area, don't hesitate to contact me. Thank you for reading this introduction and I am looking forward to sharing as much of my experience as possible. 
