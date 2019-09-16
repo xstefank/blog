@@ -13,7 +13,7 @@ Inject a simple ConfigProperty
 @Inject 
 @ConfigProperty(name = "my.custom.message") 
 String customMessage;
----- 
+----
 
 Inject a ConfigProperty with a default value
 
@@ -22,7 +22,7 @@ Inject a ConfigProperty with a default value
 @Inject 
 @ConfigProperty(name = "my.custom.message", defaultValue="My message") 
 String customMessage;
----- 
+----
 
 .Required values if no default value is provided
 ****
@@ -37,7 +37,7 @@ String customMessage;
 ----
 @Inject 
 Config config;
----- 
+----
 `getValue(String, Class<T>)`:: get single value with specified type
 `getOptionalValue(String, Class<T>)`:: get value as optional
 `getPropertyNames()`:: get iterable with names of all found properties
@@ -55,10 +55,10 @@ NOTE: there is also an option for programatic lookup with `ConfigProvider.getCon
 
 === Custom config sources
 
-implementations of `org.eclipse.microprofile.config.spi.ConfigSource`:: 
+Implementations of `org.eclipse.microprofile.config.spi.ConfigSource`:: 
 registration in `/META-INF/services/org.eclipse.microprofile.config.spi.ConfigSource`
 
-implementations of `org.eclipse.microprofile.config.spi.ConfigSourceProvider`::
+Implementations of `org.eclipse.microprofile.config.spi.ConfigSourceProvider`::
 registration in `/META-INF/services/org.eclipse.microprofile.config.spi.ConfigSourceProvider`
 
 == Converters
