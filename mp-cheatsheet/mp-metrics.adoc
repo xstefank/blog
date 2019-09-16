@@ -1,0 +1,97 @@
+= MicroProfile Metrics
+:experimental: true
+:product-name: MicroProfile Metrics
+
+This cheat sheet covers the basics of MicroProfile Metrics specification uses.
+
+== Different scopes of metrics
+
+=== Base metrics
+`/metrics/base`:: metrics that all MicroProfile vendors have to provide
+
+=== Vendor specific metrics
+`/metrics/vendor`:: vendor specific metrics (optional, not portable)
+
+=== Application metrics
+`/metrics/application`:: application-specific metrics (optional, portable)
+
+== Application metrics programming model
+
+There are two ways of registering application metrics: annotations and dynamic registration.
+
+=== Annotations based application metrics
+
+`@Counted`:: Denotes a counter, which counts the invocations of the annotated object.
+
+`@ConcurrentGauge`:: Denotes a gauge which counts the parallel invocations of the annotated object.
+
+`@Gauge`:: Denotes a gauge, which samples the value of the annotated object.
+
+`@Metered`:: Denotes a meter, which tracks the frequency of invocations of the annotated object.
+
+`@Metric`:: An annotation that contains the metadata information when requesting a metric to be injected or produced. This annotation can be used on fields of type `Meter`, `Timer`, `Counter`, and `Histogram`. For `Gauge`, the `@Metric` annotation can only be used on producer methods/fields.
+
+`@Timed`:: Denotes a timer, which tracks duration of the annotated object.
+
+`@RegistryType`:: Qualifies the scope of Metric Registry to inject when injecting a `MetricRegistry`.
+
+=== Registering metrics dynamically
+
+To register or unregister any metric dynamically you can use the methods of `MetricRegistry`. For example:
+
+[source, java]
+----
+@ApplicationScoped
+public class MetricBean {
+
+    private static final String COUNTER_NAME = "test-counter";
+    
+    @Inject
+    @RegistryType(type = MetricRegistry.Type.APPLICATION)
+    MetricRegistry applicationMetricRegistry;
+
+    public void registerMetric() {
+        Counter counter = applicationMetricRegistry.counter(COUNTER_NAME);
+        counter.inc();
+    }
+    
+    public void unregisterMetric() {
+        applicationMetricRegistry.remove(COUNTER_NAME);
+    }
+}
+----
+
+NOTE: Only application scope metrics can be registered.
+
+== Tags
+
+Values must match `[a-zA-Z_][a-zA-Z0-9_]*` (Ascii alphabet, numbers and underscore).
+
+To define a tag you can:
+
+* define it at the level of a metric:
+
+* define it at the level of the application server using the MicroProfile Config property
+`mp.metrics.tags`.
+
+NOTE: Values must escape equal symbols `=` and commas `,` with a backslash `\`.
+
+Example: `mp.metrics.tags=app=shop,tier=integration,special=deli\=ver\,y`
+
+== REST API
+
+Exposed at `/metrics` endpoint. More detailed access is available at `/metrics/<scope>` (see <<Different scopes of metrics>>) or `/metrics/<scope>/<metric_name>`.
+
+=== Data formats
+
+`OpenMetrics`:: default, Prometheus format
+
+`JSON`:: when `application/json` is specified as HTTP Accept header
+
+=== Status codes
+
+`200`:: successful invocation
+`204`:: sub-tree exists but has no metrics (e.g. no application metrics defined)
+`404`:: in requested item does not exist
+`406`:: invalid HTTP Accept header
+`500`:: error in invocation
