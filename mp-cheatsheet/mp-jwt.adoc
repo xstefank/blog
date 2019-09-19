@@ -1,0 +1,82 @@
+= MicroProfile JWT
+:experimental: true
+:product-name: MicroProfile JWT
+
+This cheat sheet covers the basics of MicroProfile JWT specification uses.
+
+== Requiring MP-JWT Access Control
+
+`org.eclipse.microprofile.jwt.LoginConfig`:: provides the same information as the web.xml login-config element
+
+[source, java]
+----
+@LoginConfig(authMethod = "MP-JWT", realmName = "TCK-MP-JWT")
+@ApplicationPath("/")
+public class TCKApplication extends Application {
+}
+----
+
+=== Integration with CDI
+
+Injection of the `JsonWebToken` (injected as `@RequestScoped`)
+
+[source, java]
+----
+@Path("/endpoint")
+@DenyAll
+@ApplicationScoped
+public class RolesEndpoint {
+
+    @Inject
+    private JsonWebToken callerPrincipal;
+----
+
+Injection of the `Claim` (injected as `@Dependent`)
+
+[source, java]
+----
+@ApplicationScoped
+public class MyEndpoint {
+    @Inject
+    @Claim(value="exp", standard=Claims.iat)
+    private Long timeClaim;
+...
+}
+----
+
+=== Common Security Annotations for the Java Platform 
+
+`@RolesAllowed`, `@PermitAll`, `@DenyAll`:: roles are mapped to the MP-JWT "groups" claim
+
+[source, java]
+----
+@Path("/endpoint")
+@DenyAll
+@RequestScoped
+public class RolesEndpoint {
+    @GET
+    @Path("/echo")
+    @RolesAllowed("Echoer")
+    public String echoInput() {
+        // ...
+    }
+
+    @GET
+    @Path("/echo2")
+    @RolesAllowed("NoSuchUser")
+    public String echoInput2()) {
+        // ...            
+    }
+}
+----
+
+== Configuration of the issuer public key
+
+Using the MicroProfile Config values:
+
+`mp.jwt.verify.publickey`:: the Public Key text itself supplied as a string
+
+`mp.jwt.verify.publickey.location`:: external or internal location of Public Key to be specified, the value may be a relative path or a URL
+
+`mp.jwt.verify.issuer`:: the expected value of the iss claim
+
