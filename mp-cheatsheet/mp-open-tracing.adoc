@@ -4,3 +4,38 @@
 
 This cheat sheet covers the basics of MicroProfile OpenTracing specification uses.
 
+== Tracing with no code instrumentation
+
+By default, all JAX-RS applications participate in distributed tracing, without any need
+to specify tracing code in the application.
+
+== Outbound requests
+
+=== JAX-RS client
+
+`org.eclipse.microprofile.opentracing.ClientTracingRegistrar.configure(ClientBuilder clientBuilder)`
+
+=== MicroProfile Rest Client
+
+Automatically enabled unless explicitly disabled with `@Traced(false)`.
+
+== Disabling server side tracing
+
+`mp.opentracing.server.skip-pattern`
+
+== @Traced
+
+Parameters:
+
+* `value=[true|false]` (default `true`) - Explicitly enable/disable tracing for the
+annotated object.
+
+* `operationName=<Name for the Span>` (default `""`) - overrides the operation name
+
+== Access to the configured tracer
+
+[source,java]
+----
+@Inject
+io.opentracing.Tracer configuredTracer;
+----
