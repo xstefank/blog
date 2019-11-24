@@ -8,14 +8,16 @@ This cheat sheet covers the basics of MicroProfile Health specification uses.
 
 1. Implement `org.eclipse.microprofile.health.HealthCheck` interface.
 2. Mark the implementation as a CDI bean (e.g. `@ApplicationScoped`).
-3. Mark the implementation with one or more of the defined health qualifiers (`@Readiness`, `@Liveness`, `@Health`).
-3. Implement the `call()` method.
+3. Mark the implementation with one or more of the defined health qualifiers
+(`@Readiness`, `@Liveness`, `@Health`).
+4. Implement the `call()` method.
 
 == Different kinds of healh checks
 
 === Readiness health check
 
-Allows third party services to know if the application is ready to process requests or not.
+Allows third party services to know if the application is ready to process
+requests or not.
 
 Qualifier:: `@Readiness`
 
@@ -23,7 +25,8 @@ Endpoint:: `/health/ready`
 
 === Liveness health check
 
-Allows third party services to determine if the application is running. Failure means that application can be discarded.
+Allows third party services to determine if the application is running.
+Failure means that application can be discarded.
 
 Qualifier:: `@Liveness`
 
@@ -31,17 +34,20 @@ Endpoint:: `/health/live`
 
 === Backward compatible health check
 
-WARNING: This kind of health check is currently depracated and will be removed in the future version of the specification.
+WARNING: This kind of health check is currently depracated and will be
+removed in the future version of the specification.
 
 Qualifier:: `@Health`
 
 Endpoint:: `/health`
 
-NOTE: The `/health` endpoint aggregates all defined procedures (defined with `@Health`, `@Liveness`, `@Readiness`). 
+NOTE: The `/health` endpoint aggregates all defined procedures (defined with
+ `@Health`, `@Liveness`, `@Readiness`).
 
-NOTE: Multiple kinds of health check can be combined on a single health check procedure.
+NOTE: Multiple kinds of health check can be combined on a single health check
+procedure.
 
-== Contructing a `HealthCheckResponse`
+== Constructing a `HealthCheckResponse`
 
 Use one of the static methods of `HealthCheckResponse` to either:
 
@@ -59,13 +65,15 @@ or
 HealthCheckResponse.down("failed-check")
 ----
 
-* contruct the `HealthCheckResponseBuilder` with the `HealthCheckResponse#named(String)` or `HealthCheckResponse#builder()` methods for a more detailed response specification:
+* construct the `HealthCheckResponseBuilder` with the `HealthCheckResponse#named(String)` or `HealthCheckResponse#builder()` methods for a more detailed response specification:
 
-NOTE: every health check is required to have a name
+NOTE: Every health check is required to have a name.
 
 === Adding custom data values to the health check response
 
-With the `HealthCheckResponseBuilder` you can use one of the overloading of the `withData` method to add a custom key-value pairs to your health check response:
+With the `HealthCheckResponseBuilder` you can use one of the overloadings
+of the `withData` method to add a custom key-value pairs to your health check
+response:
 
 [source, java]
 ----
