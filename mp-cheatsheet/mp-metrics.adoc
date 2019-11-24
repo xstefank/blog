@@ -17,23 +17,31 @@ This cheat sheet covers the basics of MicroProfile Metrics specification uses.
 
 == Application metrics programming model
 
-There are two ways of registering application metrics: annotations and dynamic registration.
+There are two ways of registering application metrics: annotations and
+dynamic registration.
 
 === Annotations based application metrics
 
-`@Counted`:: Denotes a counter, which counts the invocations of the annotated object.
+`@Counted`:: Denotes a counter, which counts the invocations of the annotated
+object.
 
-`@ConcurrentGauge`:: Denotes a gauge which counts the parallel invocations of the annotated object.
+`@ConcurrentGauge`:: Denotes a gauge which counts the parallel invocations of
+the annotated object.
 
 `@Gauge`:: Denotes a gauge, which samples the value of the annotated object.
 
-`@Metered`:: Denotes a meter, which tracks the frequency of invocations of the annotated object.
+`@Metered`:: Denotes a meter, which tracks the frequency of invocations of the
+annotated object.
 
-`@Metric`:: An annotation that contains the metadata information when requesting a metric to be injected or produced. This annotation can be used on fields of type `Meter`, `Timer`, `Counter`, and `Histogram`. For `Gauge`, the `@Metric` annotation can only be used on producer methods/fields.
+`@Metric`:: An annotation that contains the metadata information when
+requesting a metric to be injected or produced. This annotation can be used
+on fields of type `Meter`, `Timer`, `Counter`, and `Histogram`. For `Gauge`,
+the `@Metric` annotation can only be used on producer methods/fields.
 
 `@Timed`:: Denotes a timer, which tracks duration of the annotated object.
 
-`@RegistryType`:: Qualifies the scope of Metric Registry to inject when injecting a `MetricRegistry`.
+`@RegistryType`:: Qualifies the scope of the Metric Registry to inject when
+injecting a `MetricRegistry`.
 
 === Registering metrics dynamically
 
@@ -45,7 +53,7 @@ To register or unregister any metric dynamically you can use the methods of `Met
 public class MetricBean {
 
     private static final String COUNTER_NAME = "test-counter";
-    
+
     @Inject
     @RegistryType(type = MetricRegistry.Type.APPLICATION)
     MetricRegistry applicationMetricRegistry;
@@ -54,7 +62,7 @@ public class MetricBean {
         Counter counter = applicationMetricRegistry.counter(COUNTER_NAME);
         counter.inc();
     }
-    
+
     public void unregisterMetric() {
         applicationMetricRegistry.remove(COUNTER_NAME);
     }
@@ -86,7 +94,7 @@ Exposed at `/metrics` endpoint. More detailed access is available at `/metrics/<
 
 `OpenMetrics`:: default, Prometheus format
 
-`JSON`:: when `application/json` is specified as HTTP Accept header
+`JSON`:: when `application/json` is specified as HTTP `Accept` header
 
 === Status codes
 
