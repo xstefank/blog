@@ -6,8 +6,8 @@ This cheat sheet covers the basics of MicroProfile OpenTracing specification use
 
 == Tracing with no code instrumentation
 
-By default, all JAX-RS applications participate in distributed tracing, without any need
-to specify tracing code in the application.
+By default, all JAX-RS applications participate in distributed tracing,
+without any need to specify tracing code in the application.
 
 == Outbound requests
 
