@@ -54,7 +54,7 @@ This cheat sheet covers the basics of MicroProfile OpenAPI specification uses.
 `@Tag`:: a tag for the API endpoint
 `@Tags`:: a container of multiple tags
 
-=== Examples
+=== Example
 
 [source, java]
 ----
