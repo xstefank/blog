@@ -8,7 +8,8 @@ This cheat sheet covers the basics of MicroProfile Fault Tolerance specification
 
 === @Timeout
 
-`@Timeout` prevents the execution from waiting forever. It is recommended that a microservice invocation should have timeout associated with.
+`@Timeout` prevents the execution from waiting forever.
+It is recommended that microservice invocations should have an associated timeout.
 
 ==== Usage
 

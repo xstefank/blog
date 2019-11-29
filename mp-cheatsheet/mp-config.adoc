@@ -10,8 +10,8 @@ Inject a simple ConfigProperty
 
 [source,java]
 ----
-@Inject 
-@ConfigProperty(name = "my.custom.message") 
+@Inject
+@ConfigProperty(name = "my.custom.message")
 String customMessage;
 ----
 
@@ -19,8 +19,8 @@ Inject a ConfigProperty with a default value
 
 [source,java]
 ----
-@Inject 
-@ConfigProperty(name = "my.custom.message", defaultValue="My message") 
+@Inject
+@ConfigProperty(name = "my.custom.message", defaultValue="My message")
 String customMessage;
 ----
 
@@ -31,11 +31,11 @@ String customMessage;
 `Provider<base_type>`:: deployment exception but the value is reloaded with every access
 ****
 
-== Using injected configuration properties
+== Using injected configuration object
 
 [source,java]
 ----
-@Inject 
+@Inject
 Config config;
 ----
 `getValue(String, Class<T>)`:: get single value with specified type
@@ -55,7 +55,7 @@ NOTE: there is also an option for programatic lookup with `ConfigProvider.getCon
 
 === Custom config sources
 
-Implementations of `org.eclipse.microprofile.config.spi.ConfigSource`:: 
+Implementations of `org.eclipse.microprofile.config.spi.ConfigSource`::
 registration in `/META-INF/services/org.eclipse.microprofile.config.spi.ConfigSource`
 
 Implementations of `org.eclipse.microprofile.config.spi.ConfigSourceProvider`::
