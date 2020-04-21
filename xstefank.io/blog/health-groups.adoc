@@ -5,8 +5,8 @@ https://github.com/eclipse/microprofile-health[Eclipse MicroProfile Health]
 technology. In this article, we will introduce a new experimental extension to
 MicroProfile Health 2.2 called Health groups.
 
-All of the source code that we will present in this article is available at
-https://github.com/xstefank/health-groups.
+All of the source code that we will present in this article is available at this
+GitHub repository https://github.com/xstefank/health-groups.
 
 == MicroProfile 2.2 health checks
 
@@ -32,28 +32,27 @@ public class ReadinessHealthCheck implements HealthCheck {   // 3. implements He
         return HealthCheckResponse.up(ReadinessHealthCheck.class.getSimpleName());
     }
 }
-
 ----
 
 So just to recap, to define a health check your class:
 
 - needs to be a CDI bean
-- needs to have one of the health qualifiers (Readiness, Liveness, deprecated Health)
+- needs to have one of the health qualifiers (Readiness, Liveness, or deprecated Health)
 - must implement the HealthCheck interface
 
 This is everything that you can use in MicroProfile 2.2. But what if you have a
-use case which doesn't fall into one of Readiness or Liveness categories? The answer
+use case that doesn't fall into one of Readiness or Liveness categories? The answer
 is custom health groups.
 
 == Health Groups
 
 Quarkus 1.4.0.CR1 comes with a new addition to this API called health groups. 
-A health group is a basically a custom group of health check procedures that user
+A health group is basically a custom group of health check procedures that the user
 defines based on individual needs. As you probably noticed, Readiness and Liveness
-health checks are already represent two predefined health groups. With the health
-groups features you can defined as many additional health check groups as you need.
+health checks already represent two predefined health groups. With the health
+groups feature you can define as many additional health check groups as you need.
 
-=== Defining a Health Group
+=== Defining a health Group
 
 To define a health group you need only to declare at least one health check
 procedure that belong to the health group:
@@ -84,7 +83,7 @@ So the only difference now is the change of the qualifier for which we now use
 representing the name of the health group. This is all that needs to be done
 to define a new custom health group and a health check procedure that belongs to it.
 
-=== Accessing the custom health groups
+=== Accessing custom health groups
 
 Accessing the custom health groups is done a similar manner to the original 
 MicroProfile Health 2.2 health invocations. The URL to access a custom group is
@@ -221,7 +220,7 @@ Where this can come particularly handy is if you want to reuse predefined
 readiness and liveness procedures for custom views or simplified processing. For
 example, if you have several liveness procedures one of which is not essential
 and takes a long time you may want to define a health group that will be excluding
-the expensive liveness health check.
+the expensive liveness health check computation.
 
 == Summary
 
@@ -231,5 +230,5 @@ API called the Health Groups. This feature is available for use in the Quarkus
 try to specify in MicroProfile, you can expect that if this feature will be used 
 in Quarkus you will eventually see it in the MicroProfile Health specification.
 So if you are interested, please feel free to try it out, test it, and report any
-issues, enhacements to https://github.com/smallrye/smallrye-health/issues[our 
+issues or enhancements in https://github.com/smallrye/smallrye-health/issues[our 
 issue tracker].
