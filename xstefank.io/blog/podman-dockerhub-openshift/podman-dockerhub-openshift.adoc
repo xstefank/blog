@@ -116,11 +116,11 @@ So let's try to push the image once again but this time with the correct format:
 
 [source,bash]
 ----
-$ podman tag 2e3a431d7218 docker.io/xstefank/docker-hub-test:docker-format
+$ podman tag <image-id> docker.io/xstefank/docker-hub-test:docker-format
 $ podman push --format=docker docker.io/xstefank/docker-hub-test:docker-format
 ----
 
-And let's checkt the UI again:
+And let's check the UI again:
 
 image::images/2020-10-19-1603093513_1874x918.png[]
 
@@ -150,6 +150,6 @@ $ oc new-app xstefank/docker-hub-test:docker-format
     Run 'oc status' to view your app.
 ----
 
-Everything works corretly. Hopefully, this blog post will save someone a few hours of
+Everything works correctly now. Hopefully, this blog post will save someone a few hours of
 searching why the OpenShift cannot consume images from Docker Hub.
 
