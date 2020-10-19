@@ -1,0 +1,155 @@
+= Consuming Podman built images pushed to Docker Hub in OpenShift
+
+As a devoted user of https://getfedora.org/[Fedora OS] I am always trying to stay on the
+most current version available. So I updated to Fedora 32 some time ago. This came up with
+a surprise when I found out that
+https://fedoramagazine.org/docker-and-fedora-32/[Docker is not supported on Fedora 32].
+Well, I took this actually as a nice surprise as I was putting off learning
+https://podman.io/[Podman] for a long time.
+
+== Pushing to Docker Hub with Podman
+
+I came up acrross this blog post - https://computingforgeeks.com/how-to-publish-docker-image-to-docker-hub-with-podman/.
+It's pretty straightforward:
+
+[source,bash]
+----
+$ podman tag <image-id> docker.io/xstefank/docker-hub-test
+$ podman login docker.io
+$ podman push docker.io/xstefank/docker-hub-test
+----
+
+And checking it up in the Docker Hub UI:
+
+image::images/2020-10-19-1603090152_1877x895.png[]
+
+OK, looks good. So let's use it:
+
+[source,bash]
+----
+$ podman image rm --all -f
+$ podman run -i --rm -p 8080:8080 xstefank/docker-hub-test
+Trying to pull docker.io/xstefank/docker-hub-test...
+Getting image source signatures
+Copying blob a27a3a7b96ae done
+Copying blob cc8b76f6498c done
+Copying blob bbec3329480e done
+Copying blob 00b5d2050448 done
+Copying blob 4deec19fdd87 done
+Copying config 2e3a431d72 done
+Writing manifest to image destination
+Storing signatures
+exec java -Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -XX:+ExitOnOutOfMemoryError -cp . -jar /deployments/app.jar
+__  ____  __  _____   ___  __ ____  ______
+ --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/
+2020-10-19 06:53:26,303 INFO  [io.quarkus] (main) microservice-test 0.0.1 on JVM (powered by Quarkus 1.9.0.CR1) started in 0.569s. Listening on: http://0.0.0.0:8080
+2020-10-19 06:53:26,322 INFO  [io.quarkus] (main) Profile prod activated.
+2020-10-19 06:53:26,322 INFO  [io.quarkus] (main) Installed features: [cdi, resteasy]
+----
+
+Perfect, runs without issues. So what could go wrong with trying to pull this out in OpenShift?
+
+== Consuming Docker Hub images in OpenShift
+
+The image was successfully pushed to Docker Hub so there is nothing preventing us in
+consuming it in OpenShift:
+
+[source,bash]
+----
+$ oc new-app xstefank/docker-hub-test
+error:  local file access failed with: stat xstefank/docker-hub-test: no such file or directory
+error: unable to locate any images in image streams, templates loaded in accessible projects, template files, local docker images with name "xstefank/docker-hub-test"
+
+Argument 'xstefank/docker-hub-test' was classified as an image, image~source, or loaded template reference.
+
+The 'oc new-app' command will match arguments to the following types:
+
+  1. Images tagged into image streams in the current project or the 'openshift' project
+     - if you don't specify a tag, we'll add ':latest'
+  2. Images in the Docker Hub, on remote registries, or on the local Docker engine
+  3. Templates in the current project or the 'openshift' project
+  4. Git repository URLs or local paths that point to Git repositories
+
+--allow-missing-images can be used to point to an image that does not exist yet.
+
+See 'oc new-app -h' for examples.
+----
+
+Well, that's strange, isn't it? Trying out with some of my older images:
+
+[source,bash]
+----
+$ oc new-app xstefank/service-a-jvm
+--> Found container image 22b3f23 (11 months old) from Docker Hub for "xstefank/service-a-jvm"
+
+    * An image stream tag will be created as "service-a-jvm:latest" that will track this image
+
+--> Creating resources ...
+    imagestream.image.openshift.io "service-a-jvm" created
+    deployment.apps "service-a-jvm" created
+    service "service-a-jvm" created
+--> Success
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose svc/service-a-jvm'
+    Run 'oc status' to view your app.
+----
+
+This works? So what's the catch?
+
+== Podman push format
+
+It took me quite some time to figure this out and that is the reason this blog post exists.
+Podman push comes with the `format` parameter:
+
+[source,bash]
+----
+-f, --format string           Manifest type (oci, v2s1, or v2s2) to use when pushing an image using the 'dir' transport (default is manifest type of source)
+----
+
+which defaults to oci I believe. So the image that you pushed to Docker Hub is not in the
+Docker format a so OpenShift has a hard time finding it. What is strange it that locally
+with `podman run` it still works.
+
+So let's try to push the image once again but this time with the correct format:
+
+[source,bash]
+----
+$ podman tag 2e3a431d7218 docker.io/xstefank/docker-hub-test:docker-format
+$ podman push --format=docker docker.io/xstefank/docker-hub-test:docker-format
+----
+
+And let's checkt the UI again:
+
+image::images/2020-10-19-1603093513_1874x918.png[]
+
+The only visible difference is the Linux icon under the OS column. If you now try to pull
+this in OpenShift:
+
+[source,bash]
+----
+$ oc new-app xstefank/docker-hub-test:docker-format
+--> Found container image 2e3a431 (About an hour old) from Docker Hub for "xstefank/docker-hub-test:docker-format"
+
+    Red Hat Universal Base Image 8 Minimal
+    --------------------------------------
+    The Universal Base Image Minimal is a stripped down image that uses microdnf as a package manager. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. This image is maintained by Red Hat and updated regularly.
+
+    Tags: minimal rhel8
+
+    * An image stream tag will be created as "docker-hub-test:docker-format" that will track this image
+
+--> Creating resources ...
+    imagestream.image.openshift.io "docker-hub-test" created
+    deployment.apps "docker-hub-test" created
+    service "docker-hub-test" created
+--> Success
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose svc/docker-hub-test'
+    Run 'oc status' to view your app.
+----
+
+Everything works corretly. Hopefully, this blog post will save someone a few hours of
+searching why the OpenShift cannot consume images from Docker Hub.
+
