@@ -1,0 +1,37 @@
+= The role of Quarkus in the modern Java ecosystem
+
+Last year, Quarkus celebrated its 5th birthday and one additional enormous
+milestone -- 1000 contributors! Actually, there is 56 more contributors by
+now. So, what does this say about Quarkus's contribution to the Java
+ecosystem?
+
+image::./images/1kcontributors.jpg[]
+
+Java has come a long way since it was created 30 years ago. Originally
+designed for long-running applications that didn't worry too much about fast
+startup times or low memory utilization. But that changed when we started
+moving our workloads to clouds. These exact metrics became a prominent
+influence of our production costs.
+
+Most of the Java ecosystem wasn't ready for this change which was one of the
+main drivers to create Quarkus. Quarkus provides a very modern approach to
+application development while it is still built on the shoulders of giants --
+popular and years production-tested technologies like Hibernate, Netty, or
+Vert.x. This is why it's popularity skyrocketed since it was announced. And
+it is still continuously growing!
+
+So what makes Quarkus so popular? In my opinion, it's always first and
+foremost about the technology itself. While performance characteristics are
+surely important, they are mostly relevant in production environments where
+we need to restrict utilized resources. However, developers want a
+technology that helps them with the application development. Technology that
+understands their needs and provides simple way to solve their problems. And
+Quarkus invests heavily into the developer experience (which pays back).
+
+The single most important productivity tool in Quarkus is its Dev mode. Dev
+mode is a continuous run of your Quarkus application in which Quarkus
+embraced the concept of REPL (read-eval-print loop). By simply changing our
+source code, Quarkus automatically recompiles and reruns our application,
+showing the result of our work in mere milliseconds. But it doesn't stop
+there, Quarkus's Dev mode encompasses many other functionalities that we
+utilize in our everyday tasks.
