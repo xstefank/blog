@@ -7,6 +7,8 @@ ecosystem?
 
 image::./images/1kcontributors.jpg[]
 
+== What is Quarkus?
+
 Java has come a long way since it was created 30 years ago. Originally
 designed for long-running applications that didn't worry too much about fast
 startup times or low memory utilization. But that changed when we started
@@ -20,18 +22,71 @@ popular and years production-tested technologies like Hibernate, Netty, or
 Vert.x. This is why it's popularity skyrocketed since it was announced. And
 it is still continuously growing!
 
-So what makes Quarkus so popular? In my opinion, it's always first and
-foremost about the technology itself. While performance characteristics are
-surely important, they are mostly relevant in production environments where
-we need to restrict utilized resources. However, developers want a
-technology that helps them with the application development. Technology that
-understands their needs and provides simple way to solve their problems. And
-Quarkus invests heavily into the developer experience (which pays back).
+So what makes Quarkus so popular? In my opinion, two things: the technology
+itself and the community. And Quarkus excels in both.
+
+== Quarkus for developers
+
+In my opinion, whether any tech is liked or not is always first and foremost
+about the technology. Ask yourself what is more important to you when you
+are choosing your framework? Is it performance? Or the tooling support?
+Quarkus bet is that it is the overall development experience. And if you
+think about, so many frameworks and even some programming languages have
+been created solely to improve the development experience.
+
+=== Squeezing every bit of performance from Java
+
+=== Developer focused framework
+
+While performance characteristics are surely important, they are mostly
+relevant in production environments where we need to restrict utilized
+resources. However, developers want a technology that helps them with the
+application development. Technology that understands their needs and
+provides simple way to solve their problems. And Quarkus invests heavily
+into the developer experience (which pays back).
 
 The single most important productivity tool in Quarkus is its Dev mode. Dev
 mode is a continuous run of your Quarkus application in which Quarkus
 embraced the concept of REPL (read-eval-print loop). By simply changing our
 source code, Quarkus automatically recompiles and reruns our application,
 showing the result of our work in mere milliseconds. But it doesn't stop
-there, Quarkus's Dev mode encompasses many other functionalities that we
-utilize in our everyday tasks.
+there. Quarkus's Dev mode encompasses many other functionalities that we
+utilize in our everyday tasks. Features like continuous testing, Dev UI, or
+Dev Services make development such an enthusiastic experience, that it's not
+surprising people like to use Quarkus.
+
+We don't really need to dive into the individual features too much, there
+are a lot of relevant resources out there. But to give you an idea of
+typical development workflow, I want to describe the car rental application
+we develop in our latest Quarkus book called "Quarkus in Action" which was
+released in January 2025 (there is a link to a free e-book at the end of
+the article). The car rental application consists of five Quarkus services
+that communicate together via various protocols and messaging technologies
+including Apache Kafka, RabbitMQ, GraphQL, gRPC, and REST:
+
+image::./images/car-rental.png[]
+
+In the architecture diagram, the Quarkus services represent user developed
+services and are marked with the Quarkus logo. The Inventory CLI is an
+example command line application that manages the car rental fleet. You can
+find the code at https://github.com/xstefank/quarkus-in-action. If we start
+the remaining business services in Dev mode (they all run on different
+ports), all remaining services start automatically as Dev Services.
+
+Dev Services represent an abstraction of remote dependent services whether
+it is a database (Postgres, MongoDB), messaging provider (Kafka, RabbitMQ),
+or security (Keycloak). The Dev service is automatically started by the
+Quarkus's Dev and test modes. So, you don't have to mix the provider
+instances for development and test which is extremely useful in the
+continuous testing we cover next. It essentially boils down to starting a
+particular OCI (Docker or Podman) container for the particular provider
+(utilizing Testcontainers), but it doesn't have to. Some Dev services (e.g.,
+Derby or H2) start in-process.
+
+You can disable most of the Dev services with configuration. Either with the
+explicit disabling property or with an implicit definition of the
+uniquely-defining instance of the provider. For instance, if you define the
+connection URL to a database (`quarkus.datasource.jdbc.url`), Quarkus will
+use your configured database and won't start a new container.
+
+== Community engagement
