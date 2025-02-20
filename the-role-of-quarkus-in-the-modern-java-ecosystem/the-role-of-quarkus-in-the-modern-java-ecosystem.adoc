@@ -1,9 +1,9 @@
 = The role of Quarkus in the modern Java ecosystem
 
 Last year, Quarkus celebrated its 5th birthday and one additional enormous
-milestone -- 1000 contributors! Actually, there is 56 more contributors by
-now. So, what does this say about Quarkus's contribution to the Java
-ecosystem?
+milestone -- 1000 contributors! Actually, there is already 56 more
+contributors by now. So, what does this say about Quarkus's contribution to
+the Java ecosystem?
 
 image::./images/1kcontributors.jpg[]
 
@@ -21,6 +21,35 @@ application development while it is still built on the shoulders of giants --
 popular and years production-tested technologies like Hibernate, Netty, or
 Vert.x. This is why it's popularity skyrocketed since it was announced. And
 it is still continuously growing!
+
+Quarkus is an JVM framework for enterprise application development. It
+provides a platform for building microservices, serverless, or traditional
+monolithic applications. Additionally, you can also use Quarkus to build
+command line (CLI) applications, edge, GitHub bots, or Kubernetes operators.
+And this is surely not exhaustive list.
+
+Quarkus provides a very performant framework because it splits all
+application processing into two phases - build time and runtime. Every
+framework needs to execute various tasks when your application start:
+loading and parsing of the configuration, classpath scanning (annotations),
+analyzing dependencies, creating application model. Traditional frameworks
+need to execute all these operations during when the application starts.
+Every time it starts. So with every restart all of this processing needs to
+be repeated, even if the application didn't change.
+
+Quarkus moves as much of the framework processing to the build time -- to
+when you compile and package your application. In this way, the results of
+this processing are recorded and reused when the application starts. In
+other words, they are computed during build time only once and reused in
+runtime.
+
+image:./images/build-time-principle-light.png[]
+
+This variety of use cases is further
+supported by seamless GraalVM (https://www.graalvm.org/) compilation for all
+included Quarkus integrations (called extensions).
+
+Extension encapsulate individual...
 
 So what makes Quarkus so popular? In my opinion, two things: the technology
 itself and the community. And Quarkus excels in both.
