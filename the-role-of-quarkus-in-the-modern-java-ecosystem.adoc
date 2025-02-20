@@ -1,3 +1,17 @@
 = The role of Quarkus in the modern Java ecosystem
 
+Last year, Quarkus celebrated its 5th birthday and one additional enormous
+milestone -- 1000 contributors! Actually, there is 56 more contributors by
+now. So, what does this say about Quarkus's contribution to the Java
+ecosystem?
 
+Java has come a long way since it was created 30 years ago. Originally
+created for long-running applications that didn't worry too much about fast
+startup times or low memory utilization. But that changed when we started
+moving our workloads to clouds. These exact metrics became a prominent
+influence of our production costs.
+
+Most of the Java ecosystem wasn't ready for this change which was one of the
+main drivers to create Quarkus. Quarkus provides a very modern approach to
+application development. This is why it's popularity skyrocketed since it
+was announced. And it is still continuously growing!
