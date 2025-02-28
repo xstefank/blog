@@ -39,14 +39,21 @@ mode was so amazing that all applications from there (even the tooling for
 the application server) was powered by Quarkus from then on.
 
 But there was one more thing that astonished me: how fast everything moved.
+The level of activity in the Quarkus's GitHub repository was unknown to me
+before. Pull requests were reviewed and merged so quickly that your PR would
+be out of sync in hours (even minutes from time to time). Each issue was
+automatically tagged for the right people to look. More importantly, the
+rate of releases was just amazing. New release every two weeks and new
+feature release every month. Quarkus is keeping this pace to this day
+demonstrating the commitment to both the innovation and the community.
 
-For the purposes of this article, we can split the main features that
-Quarkus provides that have an influence on its position in the Java
-ecosystem into three categories:
+For the purposes of this article, we can split the main Quarkus features
+that have an influence on its position in the Java ecosystem into three
+categories:
 
-- Performance characteristics
-- Dev mode
-- Community
+- Performance characteristics and optimizations
+- Dev mode and everything it encloses
+- Community engagement and support
 
 Feel free to jump to relevant parts if you are already familiar with
 Quarkus's basics. But we need to start from the beginning to provide the
@@ -54,24 +61,26 @@ full picture of where Quarkus stands today.
 
 == What is Quarkus?
 
-Java has come a long way since it was created 30 years ago. Originally
-designed for long-running applications that didn't worry too much about fast
-startup times or low memory utilization. But that changed when we started
-moving our workloads to clouds. These exact metrics became a prominent
-influence of our production costs.
+If this is the first time you read about Quarkus, I want to start with a
+brief overview of this framework is and what it aims to achieve. Java has
+come a long way since it was created 30 years ago. Originally designed for
+long-running applications that didn't worry too much about fast startup
+times or low memory utilization. But that changed when we started moving our
+workloads to clouds. These exact metrics became a prominent influence of our
+production costs.
 
 Most of the Java ecosystem wasn't ready for this change which was one of the
 main drivers to create Quarkus. Quarkus provides a very modern approach to
 application development while it is still built on the shoulders of giants --
-popular and years production-tested technologies like Hibernate, Netty, or
+popular and production years-tested technologies like Hibernate, Netty, or
 Vert.x. This is why it's popularity skyrocketed since it was announced. And
-it is still continuously growing!
+it is still continuously growing.
 
 Quarkus is an JVM framework for enterprise application development. It
 provides a platform for building microservices, serverless, or traditional
 monolithic applications. Additionally, you can also use Quarkus to build
-command line (CLI) applications, edge, GitHub bots, or Kubernetes operators.
-And this is surely not exhaustive list.
+command line (CLI) applications, edge, GitHub bots, GitHub actions, or
+Kubernetes operators. And this is surely not exhaustive list.
 
 Quarkus provides a very performant framework because it splits all
 application processing into two phases - build time and runtime. Every
@@ -99,7 +108,7 @@ Extension encapsulate individual...
 So what makes Quarkus so popular? In my opinion, two things: the technology
 itself and the community. And Quarkus excels in both.
 
-== Quarkus for developers
+== Developer-focused framework
 
 In my opinion, whether any tech is liked or not is always first and foremost
 about the technology. Ask yourself what is more important to you when you
