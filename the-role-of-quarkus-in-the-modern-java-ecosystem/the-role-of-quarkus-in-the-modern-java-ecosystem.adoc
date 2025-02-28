@@ -130,7 +130,7 @@ this processing are recorded and reused when the application starts. In
 other words, they are computed during build time only once and reused in
 runtime.
 
-image:./images/build-time-principle-light.png[]
+image:images/build-time-principle-light.png[]
 
 === Extensions -- integrating with Quarkus
 
@@ -200,10 +200,162 @@ source code, Quarkus automatically recompiles and reruns our application,
 showing the result of our work in mere milliseconds. But it doesn't stop
 there.
 
+The Dev mode can start with for instance Quarkus CLI
+(https://quarkus.io/guides/cli-tooling) like this:
+
+[source,bash]
+----
+$ quarkus dev
+...
+
+Listening for transport dt_socket at address: 5005
+__  ____  __  _____   ___  __ ____  ______
+ --/ __ \/ / / / _ | / _ \/ //_/ / / / __/
+ -/ /_/ / /_/ / __ |/ , _/ ,< / /_/ /\ \
+--\___\_\____/_/ |_/_/|_/_/|_|\____/___/
+2025-02-28 14:33:50,534 INFO  [io.quarkus] (Quarkus Main Thread) quarkus-app 1.0.0-SNAPSHOT on JVM (powered by Quarkus 3.19.1) started in 1.356s. Listening on: http://localhost:8080
+
+2025-02-28 14:33:50,538 INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
+2025-02-28 14:33:50,538 INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [cdi, rest, smallrye-context-propagation, vertx]
+
+--
+Tests paused
+Press [e] to edit command line args (currently ''), [r] to resume testing, [o] Toggle test output, [:] for the terminal, [h] for more options>
+----
+
+Notice that it automatically opens a debug port for you to connect if you
+need. But you will find that using the Dev mode's feature can substitute
+using the debugger most of the time. This command starts an interactive
+terminal which commands are listed at the bottom of the screen. Try pressing
+`h` while the Dev mode's terminal is in focus:
+
+[source,bash]
+----
+The following commands are available:
+
+== Continuous Testing
+
+[r] - Resume testing
+[o] - Toggle test output (disabled)
+
+== Exceptions
+
+[x] - Open last exception (or project) in IDE (none)
+
+== HTTP
+
+[w] - Open the application in a browser
+[d] - Open the Dev UI in a browser
+
+== System
+
+[s] - Force restart
+[e] - Edits the command line parameters and restarts ()
+[i] - Toggle instrumentation based reload (disabled)
+[l] - Toggle live reload (enabled)
+[j] - Toggle log levels (INFO)
+[h] - Show this help
+[:] - Enter terminal mode
+[q] - Quit the application
+----
+
+As you can see, there is a lot of provided functionality out of the box. For
+instance, the instrumentation based reload (`i`) changes the quarkus reload
+in way that if you only change the bodies of methods, Quarkus only
+dynamically replaces the bytecode in your running JVM without the need to
+restart the application:
+
+[source,bash]
+----
+2025-02-28 14:40:43,865 INFO  [io.qua.dep.dev.RuntimeUpdatesProcessor] (vert.x-worker-thread-1) Application restart not required, replacing classes via instrumentation
+2025-02-28 14:40:43,879 INFO  [io.qua.dep.dev.RuntimeUpdatesProcessor] (vert.x-worker-thread-1) Live reload performed via instrumentation, no restart needed, total time: 0.046s
+----
+
+Of course, if you do something that cannot be handled by the bytecode
+replacement, the restart still takes place. Take some time to experiment
+with these options, it will surely pay out.
+
 Quarkus's Dev mode encompasses many other functionalities that we utilize in
 our everyday tasks. These features include continuous testing, Dev UI, or
 Dev Services make development such an enthusiastic experience, that it's not
-surprising people like to use Quarkus.
+surprising people like to use Quarkus. Let's now go over these feature and
+explain what they are about.
+
+=== Continuous testing
+
+If you press `r` in your Dev mode terminal, Quarkus starts the continuous
+testing which is basically run of your unit tests automatically, in the
+background, when the Dev mode reloads with your changes. At the bottom of the screen, you can see:
+
+[source,bash]
+----
+--
+All 1 test is passing (0 skipped), 1 test was run in 261ms. Tests completed at 14:46:02 due to changes to GreetingResource.class.
+----
+
+And if you change your application (so it will break the test):
+
+[source,bash]
+----
+2025-02-28 14:50:09,554 ERROR [io.qua.test] (Test runner thread) Test GreetingResourceTest#testHelloEndpoint() failed
+: java.lang.AssertionError: 1 expectation failed.
+Response body doesn't match expectation.
+Expected: is "Hello from Quarkus REST"
+  Actual: Hello from Quarkus article
+
+...
+
+1 test failed (0 passing, 0 skipped), 1 test was run in 234ms. Tests completed at 14:50:09 due to changes to GreetingResource.class.
+----
+
+Notice that the Dev mode detects the save of the file in this case and the
+test is automatically rerun in the background. This is an extremely powerful
+tool since you can see the effects of your changes directly while you're
+typing them. I usually have my IDE on one screen and the Dev mode running on
+the next to it. I type my changes in the IDE and only pay attention to the
+green color changes to red in the Dev mode terminal from time to time to
+notify me that my changes are breaking some tests. This is also a great tool
+to "force" you to do more TDD :).
+
+If you think that Quarkus always reruns your full testsuite, you don't need
+to worry about it. Quarkus tries to deduct which classes are you changing
+and only runs the tests which are relevant to your changes.
+
+=== Dev UI
+
+Dev UI aims to provide a graphical interface to your Dev mode. Generally, it
+has the same features as the terminal. However, some people prefer to click
+and some prefer to type so the individual choice is yours.
+
+You can open Dev UI on the http://localhost:8080/q/dev-ui (or different port
+if you change it) or by pressing `d` in the Dev mode terminal:
+
+image::images/devui.png[]
+
+The Dev UI landing page called "Extensions" provides an overview of the
+extensions installed in the current application. Each extension gets a card
+that it can enhance with various functionality (e.g., list CDI beans, view
+OpenAPI document, or GraphiQL). Each extension can freely include whatever
+it needs.
+
+Second tab takes you to "Configuration" that lists all available
+configuration options in the current application. It changes if you add or
+remove extensions. The lock symbol at the beginning of the line means that
+the configuration property is fixed at build time (this doesn't matter in
+Dev mode, but it will when you would compile the application).
+
+We can't go over everything here, but you can also find tabs for the
+continuous testing or Dev Services that we cover next. Again, take some time
+to look around.
+
+One more very interesting thing is the "Dependencies" tab that provides an
+interactive view of our application dependencies:
+
+image:images/devui-dependencies.png[]
+
+With the filtering mechanism at the top of the page it can be really easy to
+find where a particular dependency comes from, and it's way more
+entertaining that manual parsing of the dependency tree!
 
 === Dev Services
 
@@ -233,7 +385,7 @@ five Quarkus services that communicate together via various protocols and
 messaging technologies including Apache Kafka, RabbitMQ, GraphQL, gRPC, and
 REST:
 
-image::./images/car-rental.png[]
+image::images/car-rental.png[]
 
 In the architecture diagram, the Quarkus services represent user developed
 services and are marked with the Quarkus logo. The Inventory CLI is an
