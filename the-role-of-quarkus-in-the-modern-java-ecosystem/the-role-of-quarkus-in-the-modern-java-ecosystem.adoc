@@ -180,13 +180,11 @@ can do in the Quarkus's Dev mode next.
 In my opinion, whether any tech is liked or not is always first and foremost
 about the technology. Ask yourself what is more important to you when you
 are choosing your framework? Is it performance? Or the tooling support?
-Quarkus bet is that it is the overall development experience. And if you
-think about, so many frameworks and even some programming languages have
+Quarkus's bet is that it is the overall development experience. And if you
+think about it, so many frameworks and even some programming languages have
 been created solely to improve the development experience.
 
-=== Squeezing every bit of performance from Java
-
-=== Developer focused framework
+=== Dev mode
 
 While performance characteristics are surely important, they are mostly
 relevant in production environments where we need to restrict utilized
@@ -200,28 +198,14 @@ mode is a continuous run of your Quarkus application in which Quarkus
 embraced the concept of REPL (read-eval-print loop). By simply changing our
 source code, Quarkus automatically recompiles and reruns our application,
 showing the result of our work in mere milliseconds. But it doesn't stop
-there. Quarkus's Dev mode encompasses many other functionalities that we
-utilize in our everyday tasks. Features like continuous testing, Dev UI, or
+there.
+
+Quarkus's Dev mode encompasses many other functionalities that we utilize in
+our everyday tasks. These features include continuous testing, Dev UI, or
 Dev Services make development such an enthusiastic experience, that it's not
 surprising people like to use Quarkus.
 
-We don't really need to dive into the individual features too much, there
-are a lot of relevant resources out there. But to give you an idea of
-typical development workflow, I want to describe the car rental application
-we develop in our latest Quarkus book called "Quarkus in Action" which was
-released in January 2025 (there is a link to a free e-book at the end of
-the article). The car rental application consists of five Quarkus services
-that communicate together via various protocols and messaging technologies
-including Apache Kafka, RabbitMQ, GraphQL, gRPC, and REST:
-
-image::./images/car-rental.png[]
-
-In the architecture diagram, the Quarkus services represent user developed
-services and are marked with the Quarkus logo. The Inventory CLI is an
-example command line application that manages the car rental fleet. You can
-find the code at https://github.com/xstefank/quarkus-in-action. If we start
-the remaining business services in Dev mode (they all run on different
-ports), all remaining services start automatically as Dev Services.
+=== Dev Services
 
 Dev Services represent an abstraction of remote dependent services whether
 it is a database (Postgres, MongoDB), messaging provider (Kafka, RabbitMQ),
@@ -238,5 +222,30 @@ explicit disabling property or with an implicit definition of the
 uniquely-defining instance of the provider. For instance, if you define the
 connection URL to a database (`quarkus.datasource.jdbc.url`), Quarkus will
 use your configured database and won't start a new container.
+
+=== The power of Quarkus's Dev mode
+
+To give you an idea of typical development workflow, I want to describe the
+car rental application we develop in our latest Quarkus book called "Quarkus
+in Action" which was released in January 2025 (there is a link to a free
+e-book at the end of the article). The car rental application consists of
+five Quarkus services that communicate together via various protocols and
+messaging technologies including Apache Kafka, RabbitMQ, GraphQL, gRPC, and
+REST:
+
+image::./images/car-rental.png[]
+
+In the architecture diagram, the Quarkus services represent user developed
+services and are marked with the Quarkus logo. The Inventory CLI is an
+example command line application that manages the cars fleet. You can find
+the code at https://github.com/xstefank/quarkus-in-action. If we start the
+remaining business services in Dev mode (they all run on different ports),
+all remaining services start automatically as Dev Services (disclaimer, in
+the book we use older Quarkus version that doesn't have the LGTM Dev service
+- https://quarkus.io/guides/observability-devservices-lgtm). Together 10
+containers that start automatically, just because we run all Quarkus
+applications in Dev modes. We as users don't need to supply any
+configuration for these services manually, but of course it's possible to
+override the default if there is a need.
 
 == Community engagement
