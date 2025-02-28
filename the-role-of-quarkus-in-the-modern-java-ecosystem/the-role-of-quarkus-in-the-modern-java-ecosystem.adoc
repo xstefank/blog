@@ -361,19 +361,32 @@ entertaining that manual parsing of the dependency tree!
 
 Dev Services represent an abstraction of remote dependent services whether
 it is a database (Postgres, MongoDB), messaging provider (Kafka, RabbitMQ),
-or security (Keycloak). The Dev service is automatically started by the
+or security (Keycloak). The Dev services are automatically started by the
 Quarkus's Dev and test modes. So, you don't have to mix the provider
 instances for development and test which is extremely useful in the
-continuous testing we cover next. It essentially boils down to starting a
+combination with continuous testing. It essentially boils down to starting a
 particular OCI (Docker or Podman) container for the particular provider
 (utilizing Testcontainers), but it doesn't have to. Some Dev services (e.g.,
-Derby or H2) start in-process.
+Derby or H2) start in-process. You can find the list of all extensions that
+support Dev services at https://quarkus.io/guides/dev-services.
 
 You can disable most of the Dev services with configuration. Either with the
-explicit disabling property or with an implicit definition of the
-uniquely-defining instance of the provider. For instance, if you define the
-connection URL to a database (`quarkus.datasource.jdbc.url`), Quarkus will
-use your configured database and won't start a new container.
+explicit disabling property (e.g., `quarkus.keycloak.devservices.enabled`)
+or with an implicit definition of the uniquely-defining instance of the
+provider. For instance, if you define the connection URL to a database
+(`quarkus.datasource.jdbc.url`), Quarkus will use your configured database
+and won't start a new container.
+
+If your Dev mode starts a Dev Services that can be utilized by multiple
+Quarkus instances (e.g., Keycloak, Kafka, RabbitMQ), the Dev Services is by
+default shared among all application that need it. Of course, that also
+means that you need to track which Dev mode "owns" particular Dev Service
+because if you close it, all other Dev modes will most likely break :). But
+that's a small price to pay. Quarkus understands that you want to use a
+technology (because you added an extension for it) so it will make sure that
+your experience is as seamless as possible. You don't need to figure out how
+to run everything on your machine. If you simply have Docker (or Podman)
+installed, Quarkus takes care of everything for you.
 
 === The power of Quarkus's Dev mode
 
