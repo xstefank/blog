@@ -25,7 +25,20 @@ Quarkus brought a new way of thinking to the engineering workflows -- a
 framework that not only cares about the performance, but also puts excessive
 emphasis on the developer experience.
 
+In my experience, there is no issue proving that Quarkus has something to
+offer to any kind of audience. High throughput, lower cloud costs, and
+sustainability are easy to justify, especially when we have so many real
+users and their applications that validate what Quarkus offers
+(https://quarkus.io/userstories/).
 
+However, I'm also an engineer. I love to code and I understand the pains of
+the everyday development tasks. Which is why I was just blown away the first
+time I opened Quarkus's Dev mode. Before that, I was used to either
+application server workflow or rebuild of fat JAR after each change. The dev
+mode was so amazing that all applications from there (even the tooling for
+the application server) was powered by Quarkus from then on.
+
+But there was one more thing that astonished me: how fast everything moved.
 
 For the purposes of this article, we can split the main features that
 Quarkus provides that have an influence on its position in the Java
