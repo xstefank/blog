@@ -414,3 +414,27 @@ configuration for these services manually, but of course it's possible to
 override the default if there is a need.
 
 == Community engagement
+
+Quarkus quickly became one of the most popular JVM projects on GitHub. With
+its now over 1000 contributors, it has already more than 50 000 commits. As
+you can see in the following image, the code frequency is steady throughout
+the years:
+
+image:images/quarkus-code.png[]
+
+And as you can see the release frequency follows the same line:
+
+image:images/quarkus-tags.png[]
+
+However, the real value of this community is in its approach to
+contributions. With such a frequency of changes, it's very valuable that
+every PR gets reviewed within ours. You don't need to wait for days to get
+things done. And if you have any issues, you just need to ask. Quarkus
+engineers are very willing to help you, no matter the problem you are
+facing.
+
+Each contribution matters. It's not only about the code. For instance, if
+you want to write just the tests or the documentation (it's called guides in
+Quarkus) to ease yourself to contributing to Quarkus, that awesome!!! It's
+also fantastic way to get to know the framework internals in the
+fastest possible way.
