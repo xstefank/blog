@@ -82,14 +82,47 @@ monolithic applications. Additionally, you can also use Quarkus to build
 command line (CLI) applications, edge, GitHub bots, GitHub actions, or
 Kubernetes operators. And this is surely not exhaustive list.
 
-Quarkus provides a very performant framework because it splits all
-application processing into two phases - build time and runtime. Every
-framework needs to execute various tasks when your application start:
-loading and parsing of the configuration, classpath scanning (annotations),
-analyzing dependencies, creating application model. Traditional frameworks
-need to execute all these operations during when the application starts.
-Every time it starts. So with every restart all of this processing needs to
-be repeated, even if the application didn't change.
+=== Technology packed runtime
+
+Quarkus's website defines Quarkus as "a Kubernetes Native Java stack
+tailored for OpenJDK HotSpot and GraalVM, crafted from the best of breed
+Java libraries and standards" (https://quarkus.io/, 2025). If we break it down:
+
+_Kubernetes native_ means Quarkus makes sure that user experience in
+Kubernetes is straightforward. It provides many different pieces of
+functionalities that help with the Kubernetes deployments and management. In
+some cases, you don't even have to write any YAML because Quarkus can
+generate all descriptors for you.
+
+By _tailored for OpenJDK HotSpot and GraalVM_, the definition means that
+Quarkus aims to provide a suitable platform for both the traditional JVM
+deployments (runnable JAR) and GraalVM (https://www.graalvm.org/) native
+binaries. The native compilation with GraalVM takes the performance
+mechanisms that Quarkus provides to another level. Natively built binaries
+start in mere milliseconds and rely on a very low memory. Quarkus guarantees
+that as long as you use the integrations provided by quarkus (called
+extensions) you can free choose between the two. Compilation to native
+binary with GraalVM is triggered by a simple flag switch. Quarkus integrates
+all relevant configuration for the GraalVM so your application compiles
+successfully.
+
+_Crafted from the best of breed Java libraries and standards_ only says that
+the technology stack behind Quarkus is not fully created from scratch. Many
+of the included technologies have been around for some time (e.g., Vert.x,
+Jackson, Hibernate). What Quarkus provides is a unique way of their
+integrations that we look into next. But in the end, you use the same
+Hibernate as in any other framework so the learning curves are quite short.
+
+=== Build time/runtime split
+
+Quarkus is a very performant framework because it splits all application
+processing into two phases - build time and runtime. Every framework needs
+to execute various tasks when your application start: loading and parsing of
+the configuration, classpath scanning (annotations), analyzing dependencies,
+creating application model. Traditional frameworks need to execute all these
+operations when the application starts. Every time it starts. So with every
+restart all of this processing needs to be repeated, even if the application
+didn't change.
 
 Quarkus moves as much of the framework processing to the build time -- to
 when you compile and package your application. In this way, the results of
@@ -99,14 +132,48 @@ runtime.
 
 image:./images/build-time-principle-light.png[]
 
-This variety of use cases is further
-supported by seamless GraalVM (https://www.graalvm.org/) compilation for all
-included Quarkus integrations (called extensions).
+=== Extensions -- integrating with Quarkus
 
-Extension encapsulate individual...
+All the processing described above is further exposed for integrations that
+are called extensions. Each extension integrates some library or
+functionality so the extension developer can choose which parts of the
+library processing can be executed during build time or what needs to be
+done at runtime. For instance, imagine the path on which your OpenAPI
+document is exposed. It isn't change that often so it's sufficient to only
+record it once during build time. On the other hand, something like the port
+on which our application runs would be unreasonable to fix at build time
+since our application might run on different ports in different environments
+so it is overridable at runtime.
 
-So what makes Quarkus so popular? In my opinion, two things: the technology
-itself and the community. And Quarkus excels in both.
+Additionally, extensions can also provide any configuration for the seamless
+GraalVM native builds. The extensions developers know the library that is
+being integrated which means that they understand what kind of code the user
+of their library needs to write. Providing any of the usually required
+configuration for GraalVM build (e.g., reflectively accessed classes) is
+thus done in the extension itself, so the users don't need to provide it
+manually.
+
+There are currently more than 750 extensions available at
+https://quarkus.io/extensions/. Many library developers see the value that
+Quarkus can bring to their users and want to provide an extension for them.
+Because the number of extensions grew so quick that the Quarkus's main
+repository (https://github.com/quarkusio/quarkus) started to get too big to
+work with, we created the Quarkiverse (Quarkus + Universe). Quarkiverse is a
+GitHub organization that encapsulates community Quarkus extensions that we
+couldn't fit into the main repository. Individual repositories are
+maintained by the community contributors but are fully integrated into the
+Quarkus ecosystem. The repository maintainers can release their extensions
+as they need, and Quarkus users can pick them for their application in the
+exactly same way as with the core extension. This also means that if you
+want to have your own Quarkus extension, all you need to do is to ping the
+Quarkus team (GitHub or Zulip) and we can create a new repository for your
+extension.
+
+That's not all the extensions can do. One of the best features that Quarkus
+provides are encapsulated in its development experience called the Dev mode.
+Each extension can provide its own "magic" that makes the work with the
+integrated library easier or just plainly more fun. Let's look into what we
+can do in the Quarkus's Dev mode next.
 
 == Developer-focused framework
 
