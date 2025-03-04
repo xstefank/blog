@@ -431,26 +431,39 @@ image:images/quarkus-tags.png[]
 With such a frequent release, you might think it could be hard to keep up,
 this is why Quarkus provides two ways in which you can consume releases:
 latest/greatest and Long Term Support (LTS) releases. Both can be easily
-upgraded with the build-in mechanism called Quarkus update. Then you can
-simply run one of the following commands to update your Quarkus project to
-the latest available version:
+upgraded with the build-in mechanism called Quarkus update. You can simply
+run one of the following commands to update your Quarkus project to the
+latest available version:
 
 [source,bash]
 ----
 # CLI
 quarkus update
-
-# Maven plugin
-./mvnw io.quarkus.platform:quarkus-maven-plugin:3.19.1:update -N
 ----
+
+If you want to stick to a paritcular stream (e.g., LTS), you can add the
+`-Dstream` flag:
+
+[source,bash]
+----
+# CLI
+quarkus update -Dstream=3.15
+----
+
+For instance, if your Quarkus project is on 3.15.1, `quarkus update` will
+bump it to 3.19.1 (latest release as of the time of this writing), and
+`quarkus update -Dstream=3.15` will bump it to `3.15.3.1` (latest 3.15.x LTS
+release).
 
 === Quarkus LTS
 
 Since not all users want to move as fast as Quarkus offers, Quarkus
 introduced the concept of long term releases (LTS) which are streams that
-Quarkus community keeps supported for longer periods. You can check which
-releases are LTS together with the proposed release planning at here
-https://github.com/quarkusio/quarkus/wiki/Release-Planning.
+Quarkus community keeps supported for longer periods (usually one year). You
+can check which releases are LTS together with the proposed release dates at
+here https://github.com/quarkusio/quarkus/wiki/Release-Planning.
+
+
 
 
 === Contributing to Quarkus
