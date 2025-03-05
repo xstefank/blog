@@ -535,3 +535,29 @@ just interesting to you.
 
 
 == Summary
+
+Quarkus is surely one of the most interesting projects in the Java
+ecosystems right now. It offers many features that are not only relevant to
+running Java in production, but also to how enjoyable the experience of the
+Java development can be. It's very heavily interested in simplifying end
+application work, proving that Java is continuing to be a very compelling
+language for the modern application development.
+
+With its approach to build time optimizations, it provides a substantial
+performance boost for the main application metrics, including the utilized
+memory and the startup times which are prominent in the cloud environments.
+Additionally, the Dev mode brings so much enjoyment to day-to-day
+development, that Java engineers find it hard to go back to traditional Java
+workflows after they try it for the first time. Features like continuous
+testing, Dev UI, and Dev Services provide such an individual productivity
+boosts that it's not surprising.
+
+Since everything Quarkus is open source, contributing is really simple. The
+community is  extremely helpful, so you will be always able to find help.
+This is proved by more than 1000 contributors in just the first five years
+of Quarkus.
+
+So what is the role of Quarkus in the moder Java ecosystem? It's one of the
+leading research, development, and innovation drivers that enable Java to
+stay one of the most popular languages in the world. Quarkus's role is to
+push boundaries, and it's not stopping any time soon.
