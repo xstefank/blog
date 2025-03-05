@@ -498,15 +498,40 @@ a Red Hat build of Quarkus product.
 
 === Contributing to Quarkus
 
-The real value of this community is in its approach to
-contributions. With such a frequency of changes, it's very valuable that
-every PR gets reviewed within ours. You don't need to wait for days to get
-things done. And if you have any issues, you just need to ask. Quarkus
-engineers are very willing to help you, no matter the problem you are
-facing.
+The real value of this community is in its approach to contributions. With
+such a frequency of changes, it's very valuable that every PR gets reviewed
+within hours. You don't need to wait for days to get things done. And if you
+have any issues, you just need to ask. Quarkus engineers are very willing to
+help you, no matter the problem you are facing. All of GitHub issues, pull
+requests, discussions, mailing list, stack overflow, social media, and Zulip
+(discussion forum) are actively monitored by Quarkus engineers, so you will
+have no problem finding help if you need it.
 
 Each contribution matters. It's not only about the code. For instance, if
-you want to write just the tests or the documentation (it's called guides in
-Quarkus) to ease yourself to contributing to Quarkus, that awesome!!! It's
-also fantastic way to get to know the framework internals in the
-fastest possible way.
+you want to write the tests or the documentation (it's called guides in
+Quarkus) to ease yourself to contributing to Quarkus, that's awesome!!! It's
+also fantastic way to get to know the framework internals in the fastest
+possible way.
+
+=== Where to start if I want to contribute to Quarkus?
+
+There are several good ways to start contributing to Quarkus. One way would
+be the `good first issue` label in the main GitHub repository issues -
+https://github.com/quarkusio/quarkus/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22.
+Quarkus team actively tries to add issues to this label.
+
+Another way to contribute if you don't know where to start are working
+groups - https://quarkus.io/working-groups/. Working groups provide a way to
+organize work around specific topics. This includes research, coding,
+testing, documentation, and anything else that might come to mind. Their
+purpose is to group people with similar interest that want to move a
+specific Quarkus area forward. There are no requirements, everyone
+contributes what they want and when they want. However, for newcomers this
+can be a great way to get in touch with the core Quarkus engineers right
+from the start. I'm sure they will be more than happy to get you into the
+topic, even if you don't have much prior experience in the area. So, working
+groups can be also a great way for you to get involved in a topic that is
+just interesting to you.
+
+
+== Summary
