@@ -484,13 +484,17 @@ Since not all users want to move as fast as Quarkus offers, Quarkus
 introduced the concept of long term releases (LTS) which are streams that
 Quarkus community keeps supported for longer periods (usually one year). You
 can check which releases are LTS together with the proposed release dates at
-here https://github.com/quarkusio/quarkus/wiki/Release-Planning.
+here https://github.com/quarkusio/quarkus/wiki/Release-Planning. LTS release
+are carefully monitored and only the selected fixes are being backported
+from the main release branch. So if you prefer stability to features,
+Quarkus LTS is a perfect fit.
 
-Quarkus LTS is also supported as an enterprise subscribtion from Red Hat in
+A new LTS version is released every 6 months and there are two micro/bug-fix
+releases in between every 2 months. For more information, check
+https://quarkus.io/blog/lts-cadence[this blog post].
+
+Quarkus LTS is also supported as an enterprise subscription from Red Hat in
 a Red Hat build of Quarkus product.
-
-
-
 
 === Contributing to Quarkus
 
