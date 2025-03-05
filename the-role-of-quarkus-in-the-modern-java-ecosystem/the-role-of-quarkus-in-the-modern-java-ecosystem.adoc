@@ -154,24 +154,28 @@ thus done in the extension itself, so the users don't need to provide it
 manually.
 
 There are currently more than 750 extensions available at
-https://quarkus.io/extensions/. Many library developers see the value that
-Quarkus can bring to their users and want to provide an extension for them.
-Because the number of extensions grew so quick that the Quarkus's main
-repository (https://github.com/quarkusio/quarkus) started to get too big to
-work with, we created the Quarkiverse (Quarkus + Universe). Quarkiverse is a
-GitHub organization that encapsulates community Quarkus extensions that we
-couldn't fit into the main repository. Individual repositories are
-maintained by the community contributors but are fully integrated into the
-Quarkus ecosystem. The repository maintainers can release their extensions
-as they need, and Quarkus users can pick them for their application in the
-exactly same way as with the core extension. This also means that if you
-want to have your own Quarkus extension, all you need to do is to ping the
-Quarkus team (GitHub or Zulip) and we can create a new repository for your
-extension.
+https://quarkus.io/extensions/.
 
-That's not all the extensions can do. One of the best features that Quarkus
-provides are encapsulated in its development experience called the Dev mode.
-Each extension can provide its own "magic" that makes the work with the
+=== Quarkiverse
+
+Many library developers see the value that Quarkus can bring to their users
+and want to provide an extension for them. Because the number of extensions
+grew so quick that the Quarkus's main repository
+(https://github.com/quarkusio/quarkus) started to get too big to work with,
+we created the Quarkiverse (Quarkus + Universe). Quarkiverse is a GitHub
+organization that encapsulates community Quarkus extensions that we couldn't
+fit into the main repository. Individual repositories are maintained by the
+community contributors but are fully integrated into the Quarkus ecosystem.
+The repository maintainers can release their extensions as they need, and
+Quarkus users can pick them for their application in the exactly same way as
+with the core extension. This also means that if you want to have your own
+Quarkus extension, all you need to do is to ping the Quarkus team (GitHub or
+Zulip) and we can create a new repository for your extension.
+
+The features described in this section are not all Quarkus and its
+extensions can do. One of the best features that Quarkus provides are
+encapsulated in its development experience called the Dev mode. Each
+extension can provide its own "magic" that makes the work with the
 integrated library easier or just plainly more fun. Let's look into what we
 can do in the Quarkus's Dev mode next.
 
@@ -416,24 +420,43 @@ override the default if there is a need.
 == Community engagement
 
 Quarkus quickly became one of the most popular JVM projects on GitHub. With
-its now over 1000 contributors, it has already more than 50 000 commits. As
-you can see in the following image, the commits frequency is steady
-throughout the years:
+its now over 1000 contributors, it has already more than 50 000 commits. And
+we are only talking about the main `quarkusio/quarkus` repository, not
+including any of the 170 Quarkiverse repositories which would add even more
+activity. As you can see in the following image, the commits frequency is
+steady throughout the years:
 
 image:images/quarkus-code.png[]
 
-And as you can see the release frequency follows the same line. Quarkus
-releases a new feature release every month with a few micro releases in
-between.
+And similarly, the release frequency follows the same line. Quarkus releases
+a new feature (minor) release every month with a few bug fix (micro)
+releases in between.
 
-image:images/quarkus-tags.png[]
+[source,bash]
+----
+$ git for-each-ref --sort=-creatordate \
+  --format '%(refname) %(creatordate)' --count=10 refs/tags
+refs/tags/3.15.3.1 Thu Feb 27 09:50:51 2025 +0000
+refs/tags/3.8.6.1 Thu Feb 27 09:49:23 2025 +0000
+refs/tags/3.19.1 Wed Feb 26 10:26:24 2025 +0000
+refs/tags/3.18.4 Wed Feb 19 10:50:51 2025 +0000
+refs/tags/3.19.0 Wed Feb 19 10:49:52 2025 +0000
+refs/tags/3.19.0.CR1 Wed Feb 12 09:57:58 2025 +0000
+refs/tags/3.18.3 Wed Feb 12 09:53:22 2025 +0000
+refs/tags/3.18.2 Wed Feb 5 09:39:17 2025 +0000
+refs/tags/3.18.1 Wed Jan 29 10:12:07 2025 +0000
+refs/tags/3.18.0 Wed Jan 22 16:15:06 2025 +0000
+----
 
-With such a frequent release, you might think it could be hard to keep up,
-this is why Quarkus provides two ways in which you can consume releases:
-latest/greatest and Long Term Support (LTS) releases. Both can be easily
-upgraded with the build-in mechanism called Quarkus update. You can simply
-run one of the following commands to update your Quarkus project to the
-latest available version:
+With such a frequent release cycle, you might think it could be hard to keep
+up with upgrades, this is why Quarkus provides two ways in which you can
+consume releases: latest/greatest and Long Term Support (LTS) releases. both
+have their relevant user bases depending on preference and project use
+cases.
+
+Users can easily upgrade their Quarkus applications with the build-in
+mechanism called Quarkus update. You can simply run one of the following
+commands to update your Quarkus project to the latest available version:
 
 [source,bash]
 ----
@@ -462,6 +485,9 @@ introduced the concept of long term releases (LTS) which are streams that
 Quarkus community keeps supported for longer periods (usually one year). You
 can check which releases are LTS together with the proposed release dates at
 here https://github.com/quarkusio/quarkus/wiki/Release-Planning.
+
+Quarkus LTS is also supported as an enterprise subscribtion from Red Hat in
+a Red Hat build of Quarkus product.
 
 
 
