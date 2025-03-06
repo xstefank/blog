@@ -1,15 +1,15 @@
 = The role of Quarkus in the modern Java ecosystem
 
-From its inception in 2019, Quarkus gradually grows both in terms of its
-user adoption and innovation. The number of its different research and
+Since its inception in 2019, Quarkus has gradually grown both in user
+adoption and innovation. The number of its different research and
 development areas is just enormous. It's one of the most active Java
 projects you can find right now.
 
-Last year, Quarkus celebrated its 5th birthday and one additional enormous
-milestone -- 1000 contributors! Actually, there is already 59 more
-contributors by now. And these are contributors of the main repository only,
-not taking into account additional 170 repositories under the Quarkiverse
-organization (which we tackle later in this article).
+Last year, Quarkus celebrated its 5th birthday and one additional tremendous
+milestone -- 1000 contributors! There are already 59 more contributors by
+now. These are contributors of the main repository only, not considering the
+additional 170 repositories under the Quarkiverse organization (which we
+tackle later in this article).
 
 Quarkus pushes boundaries everywhere you can imagine. So, what does this say
 about Quarkus's contribution to the Java ecosystem?
@@ -18,46 +18,47 @@ image::./images/1kcontributors.jpg[]
 
 == Quarkus to the moon and beyond
 
-Who could have imagined 6 years ago when a few very clever minds at Red Hat
-came together and decided to design a new Java framework that it could
-revolutionize the ways of Java development, that it would take off so fast.
-Quarkus brought a new way of thinking to the engineering workflows -- a
-framework that not only cares about the performance, but also puts excessive
-emphasis on the developer experience.
+No one would have guessed 6 years ago what could become of Quarkus when a
+few very clever minds at Red Hat came together and decided to design a new
+Java framework. Undoubtedly, no one would imagine it would revolutionize
+traditional Java development and take off so fast. Quarkus brought a new way
+of thinking to the engineering workflows -- a framework that not only cares
+about the performance but also puts excessive emphasis on the developer
+experience.
 
 In my experience, there is no issue proving that Quarkus has something to
-offer to any kind of audience. High throughput, lower cloud costs, and
-sustainability are easy to justify, especially when we have so many real
+offer to any audience. High throughput, lower cloud costs, and
+sustainability is easy to justify, especially when we have so many real
 users and their applications that validate what Quarkus offers
 (https://quarkus.io/userstories/).
 
-However, I'm also an engineer. I love to code and I understand the pains of
-the everyday development tasks. Which is why I was just blown away the first
-time I opened Quarkus's Dev mode. Before that, I was used to either
-application server workflow or rebuild of fat JAR after each change. The dev
-mode was so amazing that all applications from there (even the tooling for
-the application server) was powered by Quarkus from then on.
+However, I'm also an engineer. I love to code and understand the pains of
+everyday development tasks. This is why I was blown away the first time I
+opened Quarkus's Dev mode. Before that, I was used to either application
+server workflow or rebuilding my fat JAR after each change. The dev mode was
+so amazing that all applications I wrote from there (even the application
+server tooling) were powered by Quarkus from then on.
 
 But there was one more thing that astonished me: how fast everything moved.
-The level of activity in the Quarkus's GitHub repository was unknown to me
-before. Pull requests were reviewed and merged so quickly that your PR would
-be out of sync in hours (even minutes from time to time). Each issue was
-automatically tagged for the right people to look. More importantly, the
-rate of releases was just amazing. New release every two weeks and new
-feature release every month. Quarkus is keeping this pace to this day
-demonstrating the commitment to both the innovation and the community.
+The activity level in Quarkus's GitHub repository was unknown to me before.
+Pull requests were reviewed and merged so quickly that your PR would be out
+of sync in hours (even minutes from time to time). An automated bot
+automatically tagged each issue for the right people to look at. More
+importantly, the rate of releases was just amazing. There is a new release
+every two weeks and a new feature release every month. Quarkus is keeping
+this pace to this day, demonstrating its commitment to both innovation and
+the community.
 
-For the purposes of this article, we can split the main Quarkus features
-that have an influence on its position in the Java ecosystem into three
-categories:
+For this article, we can split the main Quarkus features that have an
+influence on its position in the Java ecosystem into three categories:
 
 - Performance characteristics and optimizations
 - Dev mode and everything it encloses
 - Community engagement and support
 
 Feel free to jump to relevant parts if you are already familiar with
-Quarkus's basics. But we need to start from the beginning to provide the
-full picture of where Quarkus stands today.
+Quarkus's basics. However, we need to start from the beginning by providing
+the complete picture of where Quarkus stands today.
 
 == What is Quarkus?
 
@@ -462,16 +463,16 @@ commands to update your Quarkus project to the latest available version:
 ----
 # CLI
 quarkus update
+
+# Maven
+./mvnw quarkus:update
+
+# Gradle
+./gradlew quarkusUpdate
 ----
 
 If you want to stick to a paritcular stream (e.g., LTS), you can add the
-`-Dstream` flag:
-
-[source,bash]
-----
-# CLI
-quarkus update -Dstream=3.15
-----
+`--stream` (CLI and Gradle) or `-Dstream` flag (Maven).
 
 For instance, if your Quarkus project is on 3.15.1, `quarkus update` will
 bump it to 3.19.1 (latest release as of the time of this writing), and
