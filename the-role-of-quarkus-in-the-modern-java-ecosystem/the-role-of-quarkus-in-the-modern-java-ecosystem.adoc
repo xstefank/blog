@@ -35,7 +35,7 @@ users and their applications that validate what Quarkus offers
 However, I'm also an engineer. I love to code and understand the pains of
 everyday development tasks. This is why I was blown away the first time I
 opened Quarkus's Dev mode. Before that, I was used to either application
-server workflow or rebuilding my fat JAR after each change. The dev mode was
+server workflow or rebuilding my fat JAR after each change. The Dev mode was
 so amazing that all applications I wrote from there (even the application
 server tooling) were powered by Quarkus from then on.
 
@@ -44,7 +44,7 @@ The activity level in Quarkus's GitHub repository was unknown to me before.
 Pull requests were reviewed and merged so quickly that your PR would be out
 of sync in hours (even minutes from time to time). An automated bot
 automatically tagged each issue for the right people to look at. More
-importantly, the rate of releases was just amazing. There is a new release
+importantly, the rate of releases was just amazing. There was a new release
 every two weeks and a new feature release every month. Quarkus is keeping
 this pace to this day, demonstrating its commitment to both innovation and
 the community.
@@ -87,7 +87,7 @@ Kubernetes operators. And this is surely not an exhaustive list.
 
 Quarkus's website defines Quarkus as "a Kubernetes Native Java stack
 tailored for OpenJDK HotSpot and GraalVM, crafted from the best of breed
-Java libraries and standards" (https://quarkus.io/, 2025). If we break it
+Java libraries and standards" (https://quarkus.io). If we break it
 down:
 
 _Kubernetes native_ means Quarkus makes sure that user experience in
@@ -97,12 +97,12 @@ to write any YAML because Quarkus can generate all descriptors for you.
 
 By _tailored for OpenJDK HotSpot and GraalVM_, the definition means that
 Quarkus aims to provide a suitable platform for both the traditional JVM
-deployments (runnable JAR) and GraalVM (https://www.graalvm.org/) native
+deployments (runnable JAR) and GraalVM (https://www.graalvm.org) native
 binaries. The native compilation with GraalVM takes the performance
 mechanisms that Quarkus provides to another level. Natively built binaries
 start in mere milliseconds and rely on a very low memory. Quarkus guarantees
 that you can freely choose between the two as long as you use the
-integrations provided by quarkus (called extensions). A simple flag switch
+integrations provided by Quarkus (called extensions). A simple flag switch
 triggers compilation to native binary with GraalVM. Quarkus integrates all
 relevant configurations for the GraalVM so your application compiles
 successfully.
@@ -136,7 +136,7 @@ image:images/build-time-principle-light.png[]
 All the processing described above is further exposed for integrations that
 are called extensions. Each extension integrates some library or
 functionality so the extension developer can choose which parts of the
-library processing can execute during build time or what needs to tun at
+library processing can execute during build time or what needs to run at
 runtime. For instance, imagine the path on which your OpenAPI document is
 exposed. It doesn't change that often, so recording it only once during
 build time is sufficient. On the other hand, something like the port on
@@ -166,7 +166,7 @@ fit into the main repository. The community contributors maintain individual
 repositories but are fully integrated into the Quarkus ecosystem. The
 repository maintainers can release their extensions as they need, and
 Quarkus users can pick them for their application in precisely the same way
-as with the core extension. If you want to have your own Quarkus extension,
+as with the core extensions. If you want to have your own Quarkus extension,
 all you need to do is ping the Quarkus team (GitHub or Zulip), and we can
 create a new repository for your extension.
 
@@ -227,7 +227,7 @@ Press [e] to edit command line args (currently ''), [r] to resume testing, [o] T
 ----
 
 Notice that it automatically opens a debug port for connection if needed.
-However, you will find that using the Dev mode's feature can often be a
+However, you will find that using the Dev mode's features can often be a
 substitute for using the debugger. This command starts an interactive
 terminal; the commands are listed at the bottom of the screen. Try pressing
 `h` while the Dev mode's terminal is in focus:
@@ -316,7 +316,7 @@ Notice that the Dev mode detects the file saving in this case, and the test
 is automatically rerun in the background. Continuous testing is a potent
 tool since you can see the effects of your changes directly while you're
 typing them. I usually have my IDE on one screen and the Dev mode running on
-the next to it. I type my changes in the IDE and only pay attention to the
+the one next to it. I type my changes in the IDE and only pay attention to the
 green color changes to red in the Dev mode terminal to notify me that my
 changes are breaking some tests. It is also a great tool to "force" you to
 do more TDD :).
@@ -346,14 +346,17 @@ The second tab takes you to "Configuration," which lists all available
 configuration options in the current application. It changes if you add or
 remove extensions. The lock symbol at the beginning of the line means that
 the configuration property is fixed at build time (this doesn't matter in
-Dev mode, but it will when you would compile the application).
+Dev mode, but it will when you would compile the application). You can also
+save the configuration directly in this menu, it will propagate to your
+configuration file.
 
 We can't go over everything here, but you can also find tabs for the
 continuous testing or Dev Services that we cover next. Again, take some time
 to look around.
 
-One more very interesting thing is the "Dependencies" tab, which provides an
-interactive view of our application dependencies:
+Before we move on, there is one more very interesting thing is the
+"Dependencies" tab, which provides an interactive view of our application
+dependencies:
 
 image:images/devui-dependencies.png[]
 
@@ -381,8 +384,8 @@ the uniquely defining instance of the provider. For instance, if you define
 the connection URL to a database (`quarkus.datasource.jdbc.url`), Quarkus
 will use your configured database and won't start a new container.
 
-If your Dev mode starts a Dev Services that can be utilized by multiple
-Quarkus instances (e.g., Keycloak, Kafka, RabbitMQ), the Dev Services is by
+If your Dev mode starts a Dev Service that can be utilized by multiple
+Quarkus instances (e.g., Keycloak, Kafka, RabbitMQ), the Dev Service is by
 default shared among all applications that need it. Of course, that also
 means that you need to track which Dev mode "owns" a particular Dev Service
 because if you close it, all other Dev modes will likely break :). But
@@ -476,7 +479,7 @@ If you want to stick to a particular stream (e.g., LTS), you can add the
 
 For instance, if your Quarkus project is on 3.15.1, `quarkus update` will
 bump it to 3.19.1 (latest release as of the time of this writing), and
-`quarkus update -Dstream=3.15` will bump it to `3.15.3.1` (latest 3.15.x LTS
+`quarkus update --stream=3.15` will bump it to 3.15.3.1 (latest 3.15.x LTS
 release).
 
 === Quarkus LTS
@@ -554,6 +557,10 @@ Since everything Quarkus is open source, contributing is simple. The
 community is extremely helpful, so you will always be able to find help.
 This is proved by more than 1000 contributors in just the first five years
 of Quarkus.
+
+As promised, if you want to learn more about Quarkus, you can download our
+latest book "Quarkus in Action" for free from the Red Hat Developer -
+https://developers.redhat.com/e-books/quarkus-action.
 
 So, what is Quarkus's role in the modern Java ecosystem? It's one of the
 leading research, development, and innovation drivers that enable Java to
