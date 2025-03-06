@@ -421,17 +421,17 @@ needed.
 == Community engagement
 
 Quarkus quickly became one of the most popular JVM projects on GitHub. With
-its now over 1000 contributors, it has already more than 50 000 commits. And
-we are only talking about the main `quarkusio/quarkus` repository, not
-including any of the 170 Quarkiverse repositories which would add even more
-activity. As you can see in the following image, the commits frequency is
-steady throughout the years:
+over 1000 contributors, it already has more than 50,000 commits. And we are
+only talking about the main `quarkusio/quarkus` repository, not including
+any of the 170 Quarkiverse repositories, which would add even more activity.
+As you can see in the following image, the commits frequency has been steady
+throughout the years:
 
 image:images/quarkus-code.png[]
 
-And similarly, the release frequency follows the same line. Quarkus releases
-a new feature (minor) release every month with a few bug fix (micro)
-releases in between.
+Similarly, the release frequency follows the same line. Quarkus releases a
+new feature (minor) release every month with a few bug fix (micro) releases
+in between.
 
 [source,bash]
 ----
@@ -450,14 +450,14 @@ refs/tags/3.18.0 Wed Jan 22 16:15:06 2025 +0000
 ----
 
 With such a frequent release cycle, you might think it could be hard to keep
-up with upgrades, this is why Quarkus provides two ways in which you can
+up with upgrades; this is why Quarkus provides two ways in which you can
 consume releases: latest/greatest and Long Term Support (LTS) releases. both
 have their relevant user bases depending on preference and project use
 cases.
 
-Users can easily upgrade their Quarkus applications with the build-in
-mechanism called Quarkus update. You can simply run one of the following
-commands to update your Quarkus project to the latest available version:
+Users can easily upgrade their Quarkus applications with the built-in
+mechanism called Quarkus update. You can run one of the following commands
+to update your Quarkus project to the latest available version:
 
 [source,bash]
 ----
@@ -471,7 +471,7 @@ quarkus update
 ./gradlew quarkusUpdate
 ----
 
-If you want to stick to a paritcular stream (e.g., LTS), you can add the
+If you want to stick to a particular stream (e.g., LTS), you can add the
 `--stream` (CLI and Gradle) or `-Dstream` flag (Maven).
 
 For instance, if your Quarkus project is on 3.15.1, `quarkus update` will
@@ -482,17 +482,17 @@ release).
 === Quarkus LTS
 
 Since not all users want to move as fast as Quarkus offers, Quarkus
-introduced the concept of long term releases (LTS) which are streams that
-Quarkus community keeps supported for longer periods (usually one year). You
-can check which releases are LTS together with the proposed release dates at
-here https://github.com/quarkusio/quarkus/wiki/Release-Planning. LTS release
-are carefully monitored and only the selected fixes are being backported
-from the main release branch. So if you prefer stability to features,
+introduced the concept of long-term releases (LTS), which are streams that
+Quarkus community keeps supported for more extended periods (usually one
+year). You can check which releases are LTS and the proposed release dates
+at https://github.com/quarkusio/quarkus/wiki/Release-Planning. LTS releases
+are carefully monitored, and only the selected fixes are being backported
+from the main release branch. So, if you prefer stability to features,
 Quarkus LTS is a perfect fit.
 
-A new LTS version is released every 6 months and there are two micro/bug-fix
-releases in between every 2 months. For more information, check
-https://quarkus.io/blog/lts-cadence[this blog post].
+A new LTS version is released every 6 months, and there are two
+micro/bug-fix releases in between every 2 months. For more information,
+check https://quarkus.io/blog/lts-cadence[this blog post].
 
 Quarkus LTS is also supported as an enterprise subscription from Red Hat in
 a Red Hat build of Quarkus product.
@@ -503,15 +503,15 @@ The real value of this community is in its approach to contributions. With
 such a frequency of changes, it's very valuable that every PR gets reviewed
 within hours. You don't need to wait for days to get things done. And if you
 have any issues, you just need to ask. Quarkus engineers are very willing to
-help you, no matter the problem you are facing. All of GitHub issues, pull
-requests, discussions, mailing list, stack overflow, social media, and Zulip
+help you, no matter your problem. All of GitHub's issues, pull requests,
+discussions, mailing lists, stack overflow, social media, and Zulip
 (discussion forum) are actively monitored by Quarkus engineers, so you will
 have no problem finding help if you need it.
 
 Each contribution matters. It's not only about the code. For instance, if
 you want to write the tests or the documentation (it's called guides in
-Quarkus) to ease yourself to contributing to Quarkus, that's awesome!!! It's
-also fantastic way to get to know the framework internals in the fastest
+Quarkus) to ease yourself into contributing to Quarkus, that's awesome!!!
+It's also a fantastic way to get to know the framework in the fastest
 possible way.
 
 === Where to start if I want to contribute to Quarkus?
@@ -519,46 +519,43 @@ possible way.
 There are several good ways to start contributing to Quarkus. One way would
 be the `good first issue` label in the main GitHub repository issues -
 https://github.com/quarkusio/quarkus/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22.
-Quarkus team actively tries to add issues to this label.
+The Quarkus team is actively trying to add issues to this label.
 
-Another way to contribute if you don't know where to start are working
-groups - https://quarkus.io/working-groups/. Working groups provide a way to
-organize work around specific topics. This includes research, coding,
-testing, documentation, and anything else that might come to mind. Their
-purpose is to group people with similar interest that want to move a
-specific Quarkus area forward. There are no requirements, everyone
-contributes what they want and when they want. However, for newcomers this
-can be a great way to get in touch with the core Quarkus engineers right
-from the start. I'm sure they will be more than happy to get you into the
-topic, even if you don't have much prior experience in the area. So, working
-groups can be also a great way for you to get involved in a topic that is
-just interesting to you.
-
+Another way to contribute if you don't know where to start is working groups
+- https://quarkus.io/working-groups/. Working groups provide a way to
+organize work around specific topics. They include research, coding,
+testing, documentation, and anything else that might come to mind. They aim
+to group people with similar interests who want to move a specific Quarkus
+area forward. There are no requirements. Everyone contributes what they want
+and when they want. Additionally, this can be an excellent way for newcomers
+to get in touch with the core Quarkus engineers right from the start. I'm
+sure they will be more than happy to get you into the topic, even if you
+don't have much experience. Working groups can be a great way for you to get
+involved in a topic that is interesting to you.
 
 == Summary
 
-Quarkus is surely one of the most interesting projects in the Java
-ecosystems right now. It offers many features that are not only relevant to
-running Java in production, but also to how enjoyable the experience of the
-Java development can be. It's very heavily interested in simplifying end
-application work, proving that Java is continuing to be a very compelling
-language for the modern application development.
+Quarkus is undoubtedly one of the most interesting projects in the Java
+ecosystem. It offers many features that are not only relevant to running
+Java in production but also to how enjoyable the experience of the Java
+development can be. It's heavily interested in simplifying end application
+work, proving that Java continues to be a compelling language for modern
+application development.
 
-With its approach to build time optimizations, it provides a substantial
-performance boost for the main application metrics, including the utilized
-memory and the startup times which are prominent in the cloud environments.
-Additionally, the Dev mode brings so much enjoyment to day-to-day
-development, that Java engineers find it hard to go back to traditional Java
-workflows after they try it for the first time. Features like continuous
-testing, Dev UI, and Dev Services provide such an individual productivity
-boosts that it's not surprising.
+Its approach to build time optimizations provides substantial performance
+boost for the main application metrics, including the utilized memory and
+the startup times prominent in cloud environments. Additionally, the Dev
+mode brings so much enjoyment to day-to-day development that Java engineers
+find it hard to go back to traditional Java workflows after they try it for
+the first time. Features like continuous testing, Dev UI, and Dev Services
+provide such an individual productivity boosts that it's not surprising.
 
-Since everything Quarkus is open source, contributing is really simple. The
-community is  extremely helpful, so you will be always able to find help.
+Since everything Quarkus is open source, contributing is simple. The
+community is extremely helpful, so you will always be able to find help.
 This is proved by more than 1000 contributors in just the first five years
 of Quarkus.
 
-So what is the role of Quarkus in the moder Java ecosystem? It's one of the
+So, what is Quarkus's role in the modern Java ecosystem? It's one of the
 leading research, development, and innovation drivers that enable Java to
-stay one of the most popular languages in the world. Quarkus's role is to
+remain one of the most popular languages in the world. Quarkus's role is to
 push boundaries, and it's not stopping any time soon.
