@@ -179,34 +179,35 @@ Dev mode next.
 
 == Developer-focused framework
 
-In my opinion, whether any tech is liked or not is always first and foremost
-about the technology. Ask yourself what is more important to you when you
-are choosing your framework? Is it performance? Or the tooling support?
-Quarkus's bet is that it is the overall development experience. And if you
-think about it, so many frameworks and even some programming languages have
-been created solely to improve the development experience.
+Whether or not any tech is popular is always about the technology. Ask
+yourself what is more important to you when choosing your framework. Is it
+performance? Or the tooling support? Quarkus's bet is that it is the overall
+development experience. And if you think about it, so many frameworks and
+even some programming languages have been created solely to improve the
+development experience.
 
 === Dev mode
 
-While performance characteristics are surely important, they are mostly
-relevant in production environments where we need to restrict utilized
-resources. However, developers want a technology that helps them with the
-application development. Technology that understands their needs and
-provides simple way to solve their problems. And Quarkus invests heavily
-into the developer experience (which pays back).
+While performance characteristics are important, they are primarily relevant
+in production environments where we must restrict utilized resources.
+However, developers want a technology that helps them with the application
+development. Technology that understands their needs and provides a simple
+way to solve their problems. Quarkus invests heavily in the developer
+experience (which pays back).
 
 The single most important productivity tool in Quarkus is its Dev mode. Dev
 mode is a continuous run of your Quarkus application in which Quarkus
-embraced the concept of REPL (read-eval-print loop). By simply changing our
+embraces the REPL (read-eval-print loop) concept. By simply changing our
 source code, Quarkus automatically recompiles and reruns our application,
 showing the result of our work in mere milliseconds. But it doesn't stop
 there.
 
-The Dev mode can start with for instance Quarkus CLI
+The Dev mode can start with, for instance, Quarkus CLI
 (https://quarkus.io/guides/cli-tooling) like this:
 
 [source,bash]
 ----
+# or ./mvnw quarkus:dev or ./gradlew quarkusDev
 $ quarkus dev
 ...
 
@@ -225,10 +226,10 @@ Tests paused
 Press [e] to edit command line args (currently ''), [r] to resume testing, [o] Toggle test output, [:] for the terminal, [h] for more options>
 ----
 
-Notice that it automatically opens a debug port for you to connect if you
-need. But you will find that using the Dev mode's feature can substitute
-using the debugger most of the time. This command starts an interactive
-terminal which commands are listed at the bottom of the screen. Try pressing
+Notice that it automatically opens a debug port for connection if needed.
+However, you will find that using the Dev mode's feature can often be a
+substitute for using the debugger. This command starts an interactive
+terminal; the commands are listed at the bottom of the screen. Try pressing
 `h` while the Dev mode's terminal is in focus:
 
 [source,bash]
@@ -261,11 +262,11 @@ The following commands are available:
 [q] - Quit the application
 ----
 
-As you can see, there is a lot of provided functionality out of the box. For
-instance, the instrumentation based reload (`i`) changes the quarkus reload
-in way that if you only change the bodies of methods, Quarkus only
-dynamically replaces the bytecode in your running JVM without the need to
-restart the application:
+As you can see, Dev mode provides many functionalities. For instance, the
+instrumentation-based reload (`i`) changes the quarkus reload in a way that
+if you only change the bodies of methods, Quarkus only dynamically replaces
+the bytecode in your running JVM without the need to restart the
+application:
 
 [source,bash]
 ----
@@ -273,21 +274,22 @@ restart the application:
 2025-02-28 14:40:43,879 INFO  [io.qua.dep.dev.RuntimeUpdatesProcessor] (vert.x-worker-thread-1) Live reload performed via instrumentation, no restart needed, total time: 0.046s
 ----
 
-Of course, if you do something that cannot be handled by the bytecode
-replacement, the restart still takes place. Take some time to experiment
-with these options, it will surely pay out.
+Of course, if you do something that the bytecode replacement cannot handle,
+the restart still takes place. Take some time to experiment with these
+options, it will surely pay out.
 
 Quarkus's Dev mode encompasses many other functionalities that we utilize in
-our everyday tasks. These features include continuous testing, Dev UI, or
-Dev Services make development such an enthusiastic experience, that it's not
-surprising people like to use Quarkus. Let's now go over these feature and
+our everyday tasks. Features like continuous testing, Dev UI, or Dev
+Services make development such an enthusiastic experience that it's not
+surprising people like to use Quarkus. Let's now go over these features and
 explain what they are about.
 
 === Continuous testing
 
 If you press `r` in your Dev mode terminal, Quarkus starts the continuous
-testing which is basically run of your unit tests automatically, in the
-background, when the Dev mode reloads with your changes. At the bottom of the screen, you can see:
+testing, the automatic running of your unit tests in the background, when
+the Dev mode reloads with your changes. At the bottom of the screen, you can
+see:
 
 [source,bash]
 ----
@@ -310,26 +312,26 @@ Expected: is "Hello from Quarkus REST"
 1 test failed (0 passing, 0 skipped), 1 test was run in 234ms. Tests completed at 14:50:09 due to changes to GreetingResource.class.
 ----
 
-Notice that the Dev mode detects the save of the file in this case and the
-test is automatically rerun in the background. This is an extremely powerful
+Notice that the Dev mode detects the file saving in this case, and the test
+is automatically rerun in the background. Continuous testing is a potent
 tool since you can see the effects of your changes directly while you're
 typing them. I usually have my IDE on one screen and the Dev mode running on
 the next to it. I type my changes in the IDE and only pay attention to the
-green color changes to red in the Dev mode terminal from time to time to
-notify me that my changes are breaking some tests. This is also a great tool
-to "force" you to do more TDD :).
+green color changes to red in the Dev mode terminal to notify me that my
+changes are breaking some tests. It is also a great tool to "force" you to
+do more TDD :).
 
-If you think that Quarkus always reruns your full testsuite, you don't need
-to worry about it. Quarkus tries to deduct which classes are you changing
-and only runs the tests which are relevant to your changes.
+If you think Quarkus always reruns your entire test suite, you don't need to
+worry about it. Quarkus tries to deduct which classes you are changing and
+only runs the tests that are relevant to your changes.
 
 === Dev UI
 
 Dev UI aims to provide a graphical interface to your Dev mode. Generally, it
-has the same features as the terminal. However, some people prefer to click
-and some prefer to type so the individual choice is yours.
+has the same features as the terminal. However, some people prefer to click,
+and some prefer to type, so the individual choice is yours.
 
-You can open Dev UI on the http://localhost:8080/q/dev-ui (or different port
+You can open Dev UI on http://localhost:8080/q/dev-ui (or a different port
 if you change it) or by pressing `d` in the Dev mode terminal:
 
 image::images/devui.png[]
@@ -340,7 +342,7 @@ that it can enhance with various functionality (e.g., list CDI beans, view
 OpenAPI document, or GraphiQL). Each extension can freely include whatever
 it needs.
 
-Second tab takes you to "Configuration" that lists all available
+The second tab takes you to "Configuration," which lists all available
 configuration options in the current application. It changes if you add or
 remove extensions. The lock symbol at the beginning of the line means that
 the configuration property is fixed at build time (this doesn't matter in
@@ -350,70 +352,71 @@ We can't go over everything here, but you can also find tabs for the
 continuous testing or Dev Services that we cover next. Again, take some time
 to look around.
 
-One more very interesting thing is the "Dependencies" tab that provides an
+One more very interesting thing is the "Dependencies" tab, which provides an
 interactive view of our application dependencies:
 
 image:images/devui-dependencies.png[]
 
-With the filtering mechanism at the top of the page it can be really easy to
-find where a particular dependency comes from, and it's way more
-entertaining that manual parsing of the dependency tree!
+With the filtering mechanism at the top of the page, it can be easy to find
+where a particular dependency comes from, and it's way more entertaining
+that manual parsing of the dependency tree!
 
 === Dev Services
 
-Dev Services represent an abstraction of remote dependent services whether
-it is a database (Postgres, MongoDB), messaging provider (Kafka, RabbitMQ),
-or security (Keycloak). The Dev services are automatically started by the
-Quarkus's Dev and test modes. So, you don't have to mix the provider
-instances for development and test which is extremely useful in the
+Dev Services represent an abstraction of remote dependent services, whether
+they are databases (Postgres, MongoDB), messaging providers (Kafka,
+RabbitMQ), security (Keycloak), etc. The Dev services are automatically
+started by the Quarkus's Dev and test modes. So, you don't have to mix the
+provider instances for development and testing, which is extremely useful in
 combination with continuous testing. It essentially boils down to starting a
-particular OCI (Docker or Podman) container for the particular provider
+particular OCI (Docker or Podman) container for the specific provider
 (utilizing Testcontainers), but it doesn't have to. Some Dev services (e.g.,
-Derby or H2) start in-process. You can find the list of all extensions that
+Derby or H2) start in process. You can find the list of all extensions that
 support Dev services at https://quarkus.io/guides/dev-services.
 
-You can disable most of the Dev services with configuration. Either with the
-explicit disabling property (e.g., `quarkus.keycloak.devservices.enabled`)
-or with an implicit definition of the uniquely-defining instance of the
-provider. For instance, if you define the connection URL to a database
-(`quarkus.datasource.jdbc.url`), Quarkus will use your configured database
-and won't start a new container.
+You can turn off most of the Dev services with configuration. Either with
+the explicit disabling property (e.g.,
+`quarkus.keycloak.devservices.enabled`) or with an implicit definition of
+the uniquely defining instance of the provider. For instance, if you define
+the connection URL to a database (`quarkus.datasource.jdbc.url`), Quarkus
+will use your configured database and won't start a new container.
 
 If your Dev mode starts a Dev Services that can be utilized by multiple
 Quarkus instances (e.g., Keycloak, Kafka, RabbitMQ), the Dev Services is by
-default shared among all application that need it. Of course, that also
-means that you need to track which Dev mode "owns" particular Dev Service
-because if you close it, all other Dev modes will most likely break :). But
-that's a small price to pay. Quarkus understands that you want to use a
-technology (because you added an extension for it) so it will make sure that
-your experience is as seamless as possible. You don't need to figure out how
-to run everything on your machine. If you simply have Docker (or Podman)
-installed, Quarkus takes care of everything for you.
+default shared among all applications that need it. Of course, that also
+means that you need to track which Dev mode "owns" a particular Dev Service
+because if you close it, all other Dev modes will likely break :). But
+that's a small price to pay. Quarkus understands that you want to use
+technology (because you added an extension for it), so it will ensure your
+experience is as seamless as possible. You don't need to learn how to run
+everything on your machine. If you have Docker (or Podman) installed,
+Quarkus takes care of everything for you.
 
 === The power of Quarkus's Dev mode
 
 To give you an idea of typical development workflow, I want to describe the
-car rental application we develop in our latest Quarkus book called "Quarkus
-in Action" which was released in January 2025 (there is a link to a free
-e-book at the end of the article). The car rental application consists of
-five Quarkus services that communicate together via various protocols and
-messaging technologies including Apache Kafka, RabbitMQ, GraphQL, gRPC, and
-REST:
+car rental application we developed in our latest Quarkus book called
+"Quarkus in Action," which was published in January 2025 (there is a link to
+a free e-book at the end of the article). The car rental application
+consists of five Quarkus services that communicate together via various
+protocols and messaging technologies, including Apache Kafka, RabbitMQ,
+GraphQL, gRPC, and REST:
 
 image::images/car-rental.png[]
 
-In the architecture diagram, the Quarkus services represent user developed
+In the architecture diagram, the Quarkus services represent user-developed
 services and are marked with the Quarkus logo. The Inventory CLI is an
-example command line application that manages the cars fleet. You can find
-the code at https://github.com/xstefank/quarkus-in-action. If we start the
-remaining business services in Dev mode (they all run on different ports),
-all remaining services start automatically as Dev Services (disclaimer, in
-the book we use older Quarkus version that doesn't have the LGTM Dev service
-- https://quarkus.io/guides/observability-devservices-lgtm). Together 10
-containers that start automatically, just because we run all Quarkus
-applications in Dev modes. We as users don't need to supply any
-configuration for these services manually, but of course it's possible to
-override the default if there is a need.
+example command line application that manages the car fleet. You can find
+the code at https://github.com/xstefank/quarkus-in-action. Suppose we start
+the remaining business services in Dev mode (they all run on different
+ports). In that case, all remaining services start automatically as Dev
+Services (disclaimer: in the book, we use an older Quarkus version that
+doesn't have the LGTM Dev service -
+https://quarkus.io/guides/observability-devservices-lgtm). Together 10
+containers that start automatically because we run all Quarkus applications
+in Dev modes. We, as users, don't need to supply any configuration for these
+services manually, but of course, it's possible to override the defaults if
+needed.
 
 == Community engagement
 
