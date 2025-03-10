@@ -425,47 +425,46 @@ needed.
 
 == Innovation
 
-Quarkus is one of the leading platforms where new Java investigations and
-innovations happen. If you take any of the latest new developments (virtual
+Quarkus is one of the leading platforms for new Java investigations and
+innovations. If you take any of the latest new developments (virtual
 threads, HTTP 3, LLM), Quarkus is always there to define how Java evolves.
-We don't have a space here to go over all research areas, but let's take an
+We don't have space here to go over all research areas, but let's take an
 example in the latest popular technology: Large Language Models (LLMs).
 
 === AI and LangChain4j
 
 The leading Java library for any work related to AI is called LangChain4j
-(https://github.com/langchain4j/langchain4j). Quarkus has not only the
-top-level support for it in various extensions
-(https://quarkus.io/extensions/?search-regex=langchain4j) but Quarkus core
-engineers are also the main maintainers of the upstream library. Quarkus is
-thus the defining force behind the Java developers who use AI in their
-applications.
+(https://github.com/langchain4j/langchain4j). Quarkus has top-level support
+for it in various extensions.
+(https://quarkus.io/extensions/?search-regex=langchain4j), Additionally,
+Quarkus core engineers are also the primary maintainers of the upstream
+library. Quarkus is thus the defining force behind the Java developers who
+use AI in their applications.
 
-If you are interested, LangChain4j extensions are also a great examples of
-what Quarkus extension provides in terms of the library integration. You can
-see how it transforms the programmatic LangChain4j APIs to the
-annotation-based model that is more common in the enterprise application
-development. However, if you prefer to use LangChain4j directly, you are
-free to choose to do so.
+If you are interested, LangChain4j extensions are also great examples of
+what Quarkus extension provides regarding library integration. You can see
+how it transforms the programmatic LangChain4j APIs to the annotation-based
+model that is more common in enterprise application development. However, if
+you prefer to use LangChain4j directly, you are free to choose to do so.
 
 === Model Context Protocol
 
-Model Context Protocol (MCP, https://modelcontextprotocol.io) is a new
-protocol that aims to define the way how applications provide context to
-LLMs. The context represents either tools (operations that LLM can execute),
-resources (file contents, URLs,...), and pre-defined prompts.
+One of the latest innovation areas in AI integration is the Model Context
+Protocol (MCP, https://modelcontextprotocol.io). MCP is a new protocol that
+aims to define the way how applications provide context to LLMs. The context
+represents tools (operations that LLM can execute), resources (file
+contents, URLs,...), and pre-defined prompts.
 
-Quarkus LangChain4j was the first to define a Java API for both the MCP
-servers and clients. The defined programming model aligns with the already
-defined standard way of LangChain4j integration in Quarkus. Plugging in MCP
-thus seems extremely familiar, even if the technology just came out.
+Quarkus LangChain4j was the first to define a Java API for the MCP servers
+and clients. The defined programming model aligns with the standard
+LangChain4j integration in Quarkus. Plugging in MCP thus seems extremely
+familiar, even if the technology just came out.
 
 Recently, Quarkus also introduced the Quarkus MCP servers
 (https://github.com/quarkiverse/quarkus-mcp-servers) which is the first
-project that groups Java-based MCP servers. Quarkus demonstrates that Java
-is still modern and powerful language, even for the latest technological
-trends.
-
+project that groups Java-based MCP servers. With all of this work, you can
+see how Quarkus demonstrates that Java is still a modern and powerful
+language, even for the latest technological trends.
 
 == Community engagement
 
