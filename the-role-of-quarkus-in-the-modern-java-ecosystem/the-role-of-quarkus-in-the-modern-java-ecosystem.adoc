@@ -130,6 +130,7 @@ Quarkus moves as much framework processing as possible to the build time
 (when you compile and package your application). This way, the processing
 results are recorded and reused when the application starts. In other words,
 they are computed during build time only once and reused at runtime.
+
 image:images/build-time-principle-light.png[]
 
 === Extensions -- integrating with Quarkus
@@ -356,16 +357,6 @@ We can't go over everything here, but you can also find tabs for the
 continuous testing or Dev Services that we cover next. Again, take some time
 to look around.
 
-Before we move on, there is one more very interesting thing is the
-"Dependencies" tab, which provides an interactive view of our application
-dependencies:
-
-image:images/devui-dependencies.png[]
-
-With the filtering mechanism at the top of the page, it can be easy to find
-where a particular dependency comes from, and it's way more entertaining
-that manual parsing of the dependency tree!
-
 === Dev Services
 
 Dev Services represent an abstraction of remote dependent services, whether
@@ -576,10 +567,10 @@ testing, documentation, and anything else that might come to mind. They aim
 to group people with similar interests who want to move a specific Quarkus
 area forward. There are no requirements. Everyone contributes what they want
 and when they want. Additionally, this can be an excellent way for newcomers
-to get in touch with the core Quarkus engineers right from the start. I'm
-sure they will be more than happy to get you into the topic, even if you
-don't have much experience. Working groups can be a great way for you to get
-involved in a topic that is interesting to you.
+to get in touch with the core Quarkus engineers right from the start. They
+will be more than happy to start you up on the topic, even if you don't have
+much experience. Working groups can be a great way for you to get involved
+in a topic that is interesting to you.
 
 == Summary
 
