@@ -6,7 +6,7 @@ development areas is just enormous. It's one of the most active Java
 projects you can find right now.
 
 Last year, Quarkus celebrated its 5th birthday and one additional tremendous
-milestone -- 1000 contributors! These are contributors of the main
+milestone -- 1000 contributors! These are contributors to the main
 repository only, not considering the additional 170 repositories under the
 Quarkiverse organization (which we tackle later in this article).
 
@@ -21,21 +21,21 @@ No one would have guessed 6 years ago what could become of Quarkus when a
 few very clever minds at Red Hat came together and decided to design a new
 Java framework. Undoubtedly, no one would imagine it would revolutionize
 traditional Java development and take off so fast. Quarkus brought a new way
-of thinking to the engineering workflows -- a framework that not only cares
+of thinking to the engineering workflows — a framework that not only cares
 about the performance but also puts impressive emphasis on the developer
 experience.
 
 In my experience, there is no issue proving that Quarkus has something to
 offer to any audience. High throughput, lower cloud costs, and
-sustainability is easy to justify, especially when we have so many real
+sustainability are easy to justify, especially when we have so many real
 users and their applications that validate what Quarkus offers
 (https://quarkus.io/userstories/).
 
 However, I'm also an engineer. I love to code and understand the pains of
-everyday development tasks. This is why I was blown away the first time I
-opened Quarkus's Dev mode. Before that, I was used to either application
-server workflow or rebuilding my fat JAR after each change. The Dev mode was
-so amazing that all applications I wrote from there (even the application
+everyday development tasks. This is why I was blown away when I first opened
+Quarkus's Dev mode. Before that, I was used to either application server
+workflow or rebuilding my fat JAR after each change. The Dev mode was so
+amazing that all applications I wrote from there (even the application
 server tooling) were powered by Quarkus from then on.
 
 But there was one more thing that astonished me: how fast everything moved.
@@ -43,10 +43,10 @@ The activity level in Quarkus's GitHub repository was unknown to me before.
 Pull requests were reviewed and merged so quickly that your PR would be out
 of sync in hours (even minutes from time to time). An automated bot
 automatically tagged each issue for the right people to look at. More
-importantly, the rate of releases was just amazing. There was a new release
-every two weeks and a new feature release every month. Quarkus is keeping
-this pace to this day, demonstrating its commitment to both innovation and
-the community.
+importantly, the rate of releases was just impressive. There was a new
+release every two weeks and a new feature release every month. Quarkus is
+keeping this pace to this day, demonstrating its commitment to both
+innovation and the community.
 
 For this article, we can split the main Quarkus features that have an
 influence on its position in the Java ecosystem into four categories:
@@ -62,9 +62,9 @@ the complete picture of where Quarkus stands today.
 
 == What is Quarkus?
 
-If this is the first time you read about Quarkus, I want to start with a
-brief overview of this framework and its aims. Java has come a long way
-since it was created 30 years ago. Originally designed for long-running
+If this is the first time you are reading about Quarkus, I want to start
+with a brief overview of this framework and its aims. Java has come a long
+way since it was created 30 years ago. Initially designed for long-running
 applications that didn't require fast startup times or low memory
 utilization, Java struggled when we started moving our workloads to the
 cloud. These exact metrics became a prominent influence on our production
@@ -72,10 +72,10 @@ costs.
 
 Most of the Java ecosystem wasn't ready for this change, which was one of
 the main drivers behind creating Quarkus. Quarkus provides a very modern
-approach to application development while it still builds on the shoulders
-of giants -- popular and production years-tested technologies like
-Hibernate, Netty, or Vert.x. This is why its popularity has skyrocketed
-since its announcement. And it is still continuously growing.
+approach to application development while still building on the shoulders of
+giants — popular and production years-tested technologies like Hibernate,
+Netty, or Vert.x. This is why its popularity has skyrocketed since its
+announcement. And it is still continuously growing.
 
 More than a JVM framework for enterprise application development, Quarkus
 provides a platform for building microservices, serverless, or traditional
@@ -96,17 +96,17 @@ Kubernetes is straightforward. It provides many functionalities that help
 with Kubernetes deployments and management. Sometimes, you don't even have
 to write any YAML because Quarkus can generate all descriptors for you.
 
-By _tailored for OpenJDK HotSpot and GraalVM_, the definition means that
-Quarkus aims to provide a suitable platform for both the traditional JVM
-deployments (runnable JAR) and GraalVM (https://www.graalvm.org) native
+By being _tailored for OpenJDK HotSpot and GraalVM_, the definition means
+that Quarkus aims to provide a suitable platform for both the traditional
+JVM deployments (runnable JAR) and GraalVM (https://www.graalvm.org) native
 binaries. The native compilation with GraalVM takes the performance
 mechanisms that Quarkus provides to another level. Natively built binaries
 start in mere milliseconds and rely on a very low memory. Quarkus guarantees
 that you can freely choose between the two as long as you use the
-integrations provided by Quarkus (called extensions). A simple flag switch
-triggers compilation to native binary with GraalVM. Quarkus integrates all
-relevant configurations for the GraalVM so your application compiles
-successfully.
+integrations provided by Quarkus (called extensions). If you do so, then a
+simple flag switch triggers compilation to native binary with GraalVM.
+Quarkus integrates all relevant configurations for the GraalVM so your
+application compiles successfully.
 
 _Crafted from the best-of-breed Java libraries and standards_ only says that
 the technology stack behind Quarkus is not entirely created from scratch.
@@ -118,13 +118,13 @@ Hibernate as in any other framework, so the learning curve is short.
 === Build time/runtime split
 
 Quarkus is a very performant framework because it splits all application
-processing into two phases - build time and runtime. Every framework needs
-to execute various tasks when your application starts: loading and parsing
-of the configuration, classpath scanning (annotations), analyzing
-dependencies, and creating an application model. Traditional frameworks need
-to execute all these operations when the application starts. Every time it
-starts. So, with every restart, all of this processing needs to be repeated,
-even if the application hasn't changed.
+processing into two phases: build time and runtime. Every framework needs to
+execute various tasks when your application starts: loading and parsing of
+the configuration, classpath scanning (annotations), analyzing dependencies,
+and creating an application model. Traditional frameworks need to execute
+all these operations when the application starts. Every time it starts. So,
+with every restart, all of this processing needs to be repeated, even if the
+application hasn't changed.
 
 Quarkus moves as much framework processing as possible to the build time
 (when you compile and package your application). This way, the processing
@@ -146,7 +146,7 @@ which our application runs would be unreasonable to fix at build time since
 it might run on different ports in different environments, so it needs to be
 overridable at runtime.
 
-Additionally, extensions can also provide configuration useful for seamless
+Additionally, extensions can provide a helpful configuration for seamless
 GraalVM native builds. The extension developers know the integrated library,
 which means they understand what kind of code their library user needs to
 write. Providing any of the usually required configurations for GraalVM
@@ -173,7 +173,7 @@ Creating a Quarkiverse extension is easy, just follow the
 https://github.com/quarkiverse/quarkiverse/wiki#getting-an-extension-onboarded[onboarding
 process].
 
-The features described in this section are not all Quarkus and its
+The features described in this section are not all that Quarkus and its
 extensions can do. One of the best features Quarkus provides is encapsulated
 in its development experience called the Dev mode. Each extension can
 provide its own "magic" that makes the work with the integrated library
@@ -185,8 +185,8 @@ Dev mode next.
 Whether or not any tech is popular is always about the technology. Ask
 yourself what is more important to you when choosing your framework. Is it
 performance? Or the tooling support? Quarkus bet that it is the overall
-development experience. And if you think about it, so many frameworks and
-even some programming languages have been created solely to improve the
+development experience. If you think about it, so many frameworks and even
+some programming languages have been created solely to improve the
 development experience.
 
 === Dev mode
@@ -319,10 +319,10 @@ Notice that the Dev mode detects the file saving in this case, and the test
 is automatically rerun in the background. Continuous testing is a potent
 tool since you can see the effects of your changes directly while you're
 typing them. I usually have my IDE on one screen and the Dev mode running on
-the one next to it. I type my changes in the IDE and only pay attention to the
-green color changes to red in the Dev mode terminal to notify me that my
-changes are breaking some tests. It is also a great tool to "force" you to
-do more Test-Driven Development :).
+the one next to it. I type my changes in the IDE and only pay attention to
+the green color changing to red in the Dev mode terminal to notify me that
+my changes are breaking some tests. It is also a great tool to "force" you
+to do more Test-Driven Development.
 
 If you think Quarkus always reruns your entire test suite, you don't need to
 worry about it. Quarkus tries to deduct which classes you are changing and
@@ -342,15 +342,15 @@ image::images/devui.png[]
 The Dev UI landing page called "Extensions" provides an overview of the
 extensions installed in the current application. Each extension gets a card
 that it can enhance with various functionality (e.g., list CDI beans, view
-OpenAPI document, or GraphiQL). Each extension can freely include whatever
-it needs.
+OpenAPI document, or start GraphiQL). Each extension can freely include
+whatever it needs.
 
 The second tab takes you to "Configuration," which lists all available
 configuration options in the current application. It changes if you add or
 remove extensions. The lock symbol at the beginning of the line means that
 the configuration property is fixed at build time (this doesn't matter in
-Dev mode, but it will when you would compile the application). You can also
-save the configuration directly in this menu, it will propagate to your
+Dev mode, but it will when you compile the application). You can also save
+the configuration directly in this menu, it will propagate to your
 configuration file.
 
 We can't go over everything here, but you can also find tabs for the
@@ -366,9 +366,10 @@ started by the Quarkus's Dev and Test modes. So, you don't have to mix the
 provider instances for development and testing, which is extremely useful in
 combination with continuous testing. It essentially boils down to starting a
 particular OCI (Docker or Podman) container for the specific provider
-(utilizing Testcontainers), but it doesn't have to. Some Dev services (e.g.,
-Derby or H2) start in process. You can find the list of all extensions that
-support Dev services at https://quarkus.io/guides/dev-services.
+(utilizing Testcontainers) and injecting the connection configuration, but
+it doesn't have to. Some Dev services (e.g., Derby or H2) start in process.
+You can find the list of all extensions that support Dev services at
+https://quarkus.io/guides/dev-services.
 
 You can turn off most of the Dev services with configuration. Either with
 the explicit disabling property (e.g.,
@@ -378,20 +379,20 @@ the connection URL to a database (`quarkus.datasource.jdbc.url`), Quarkus
 will use your configured database and won't start a new container.
 
 If your Dev mode starts a Dev Service that can be utilized by multiple
-Quarkus instances (e.g., Keycloak, Kafka, RabbitMQ), the Dev Service is by
-default shared among all applications that need it. Of course, that also
+Quarkus instances (e.g., Keycloak, Kafka, RabbitMQ), the Dev Service is, by
+default, shared among all applications that need it. Of course, that also
 means that you need to track which Dev mode "owns" a particular Dev Service
-because if you close it, all other Dev modes will likely break :). But
-that's a small price to pay. Quarkus understands that you want to use
-technology (because you added an extension for it), so it will ensure your
-experience is as seamless as possible. You don't need to learn how to run
-everything on your machine. If you have Docker (or Podman) installed,
-Quarkus takes care of everything for you.
+because if you close it, all other Dev modes will likely break. But that's a
+small price to pay. Quarkus understands that you want to use technology
+(because you added an extension for it), so it will ensure your experience
+is as seamless as possible. You don't need to learn how to run everything on
+your machine. If you have Docker (or Podman) installed, Quarkus takes care
+of everything for you.
 
 === The power of Quarkus's Dev mode
 
-To give you an idea of typical development workflow, I want to describe the
-car rental application we developed in our latest Quarkus book called
+To give you an idea of the typical development workflow, I want to describe
+the car rental application we developed in our latest Quarkus book called
 "Quarkus in Action," which was published in January 2025 (there is a link to
 a free e-book at the end of the article). The car rental application
 consists of five Quarkus services that communicate together via various
@@ -407,12 +408,12 @@ the code at https://github.com/xstefank/quarkus-in-action. Suppose we start
 the remaining business services in Dev mode (they all run on different
 ports). In that case, all remaining services start automatically as Dev
 Services (disclaimer: in the book, we use an older Quarkus version that
-doesn't have the LGTM Dev service -
-https://quarkus.io/guides/observability-devservices-lgtm). Together 10
-containers that start automatically because we run all Quarkus applications
-in Dev modes. We, as users, don't need to supply any configuration for these
-services manually, but of course, it's possible to override the defaults if
-needed.
+doesn't have the LGTM Dev service —
+https://quarkus.io/guides/observability-devservices-lgtm). Together, 10
+containers start automatically because we run all Quarkus applications in
+Dev modes, and everything is correctly connected. We, as users, don't need
+to supply any configuration for these services manually, but of course, it's
+possible to override the defaults if needed.
 
 == Innovation
 
@@ -424,7 +425,7 @@ example in the latest popular technology: Large Language Models (LLMs).
 
 === AI and LangChain4j
 
-The leading Java library for any work related to AI is called LangChain4j
+The leading Java library for any AI-related work is called LangChain4j
 (https://github.com/langchain4j/langchain4j). Quarkus has top-level support
 for it in various extensions.
 (https://quarkus.io/extensions/?search-regex=langchain4j), Additionally,
@@ -436,23 +437,23 @@ If you are interested, LangChain4j extensions are also great examples of
 what Quarkus extension provides regarding library integration. You can see
 how it transforms the programmatic LangChain4j APIs to the annotation-based
 model that is more common in enterprise application development. However, if
-you prefer to use LangChain4j directly, you are free to choose to do so.
+you prefer to use LangChain4j directly, you are free to do so.
 
 === Model Context Protocol
 
 One of the latest innovation areas in AI integration is the Model Context
 Protocol (MCP, https://modelcontextprotocol.io). MCP is a new protocol that
-aims to define the way how applications provide context to LLMs. The context
+aims to define how applications provide context to LLMs. The context
 represents tools (operations that LLM can execute), resources (file
-contents, URLs,...), and pre-defined prompts.
+contents, URLs, etc.), and pre-defined prompts.
 
-Quarkus LangChain4j was the first to define a Java API for the MCP servers
-and clients. The defined programming model aligns with the standard
+Quarkus LangChain4j was one of the first to define a Java API for the MCP
+servers and clients. The defined programming model aligns with the standard
 LangChain4j integration in Quarkus. Plugging in MCP thus seems extremely
 familiar, even if the technology just came out.
 
 Recently, Quarkus also introduced the Quarkus MCP servers
-(https://github.com/quarkiverse/quarkus-mcp-servers) which is the first
+(https://github.com/quarkiverse/quarkus-mcp-servers), which is the first
 project that groups Java-based MCP servers. With all of this work, you can
 see how Quarkus demonstrates that Java is still a modern and powerful
 language, even for the latest technological trends.
@@ -463,14 +464,14 @@ Quarkus quickly became one of the most popular JVM projects on GitHub. With
 over 1000 contributors, it already has more than 50,000 commits. And we are
 only talking about the main `quarkusio/quarkus` repository, not including
 any of the 170 Quarkiverse repositories, which would add even more activity.
-As you can see in the following image, the commits frequency has been steady
+As you can see in the following image, the commit frequency has been steady
 throughout the years:
 
 image:images/quarkus-code.png[]
 
 Similarly, the release frequency follows the same line. Quarkus releases a
-new feature (minor) release every month with a few bug fix (micro) releases
-in between.
+new feature (minor) release every month with a few bug fixes (micro)
+releases in between.
 
 [source,bash]
 ----
@@ -490,13 +491,13 @@ refs/tags/3.18.0 Wed Jan 22 16:15:06 2025 +0000
 
 With such a frequent release cycle, you might think it could be hard to keep
 up with upgrades; this is why Quarkus provides two ways in which you can
-consume releases: latest/greatest and Long Term Support (LTS) releases. both
+consume releases: latest/greatest and Long Term Support (LTS) releases. Both
 have their relevant user bases depending on preference and project use
 cases.
 
 Users can easily upgrade their Quarkus applications with the built-in
-mechanism called Quarkus update. You can run one of the following commands
-to update your Quarkus project to the latest available version:
+Quarkus update mechanism. You can run one of the following commands to
+update your Quarkus project to the latest available version:
 
 [source,bash]
 ----
@@ -522,7 +523,7 @@ release).
 
 Since not all users want to move as fast as Quarkus offers, Quarkus
 introduced the concept of long-term releases (LTS), which are streams that
-Quarkus community keeps supported for more extended periods (usually one
+the Quarkus community keeps supported for more extended periods (usually one
 year). You can check which releases are LTS and the proposed release dates
 at https://github.com/quarkusio/quarkus/wiki/Release-Planning. LTS releases
 are carefully monitored, and only the selected fixes are being backported
@@ -534,7 +535,7 @@ micro/bug-fix releases in between every 2 months. For more information,
 check https://quarkus.io/blog/lts-cadence[this blog post].
 
 Quarkus LTS is also supported as an enterprise subscription from Red Hat in
-a product appropriately called Red Hat build of Quarkus (RHBQ).
+a product called Red Hat build of Quarkus (RHBQ).
 
 === Contributing to Quarkus
 
@@ -553,12 +554,12 @@ Quarkus) to ease yourself into contributing to Quarkus, that's awesome!!!
 It's also a fantastic way to get to know the framework in the fastest
 possible way.
 
-=== Where to start if I want to contribute to Quarkus?
+=== Where do I start if I want to contribute to Quarkus?
 
 There are several good ways to start contributing to Quarkus. One way would
 be the `good first issue` label in the main GitHub repository issues -
 https://github.com/quarkusio/quarkus/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22.
-The Quarkus team is actively trying to add issues to this label.
+The Quarkus team is actively trying to add new issues to this label.
 
 Another way to contribute if you don't know where to start is working groups
 - https://quarkus.io/working-groups/. Working groups provide a way to
@@ -569,14 +570,14 @@ area forward. There are no requirements. Everyone contributes what they want
 and when they want. Additionally, this can be an excellent way for newcomers
 to get in touch with the core Quarkus engineers right from the start. They
 will be more than happy to start you up on the topic, even if you don't have
-much experience. Working groups can be a great way for you to get involved
-in a topic that is interesting to you.
+much experience. Working groups can be an excellent way for you to get
+involved in a topic that is interesting to you.
 
 == Summary
 
 Quarkus is undoubtedly one of the most interesting projects in the Java
 ecosystem. It offers many features that are not only relevant to running
-Java in production but also to how enjoyable the experience of the Java
+Java in production but also to how enjoyable the experience of Java
 development can be. It's heavily interested in simplifying end application
 work, proving that Java continues to be a compelling language for modern
 application development.
