@@ -1,0 +1,157 @@
+= Quarkus CLI - the magical sword for your Quarkus journey
+
+Command line interfaces form nowadays an essential part of our everyday toolboxes
+and Quarkus CLI is not an exception. However, is there any benefit in using it
+over the traditional build tools?
+
+== What is Quarkus CLI?
+
+At its core, Quarkus CLI is a wrapper over the Quarkus Maven or Quarkus Gradle
+plugins. Its functionalities include (non-exhaustive):
+
+- Creating new Quarkus projects
+- Managing extensions
+- Running and testing your application
+- Building and pushing containers
+- Deploying your application to the cloud
+- Upgrading your Quarkus application
+
+After you install the CLI (see the instructions later), you can simply run the
+`quarkus` command in any shell of your choosing:
+
+[source,bash]
+----
+$ quarkus
+
+Quarkus CLI version 3.24.2
+
+Create Quarkus projects with Maven, Gradle, or JBang.
+Manage extensions and source registries.
+
+Create: quarkus create
+Iterate: quarkus dev
+Build and test: quarkus build
+
+Find more information at https://quarkus.io
+If you have questions, check https://github.com/quarkusio/quarkus/discussions
+
+
+Usage: quarkus [-ehv] [--refresh] [--verbose] [--config=CONFIG]
+               [-D=<String=String>]... [COMMAND]
+
+...
+----
+
+But what are the benefits of using the Quarkus CLI over using the Maven or
+Gradle plugin directly?
+
+== To Quarkus CLI or not to Quarkus CLI?
+
+The main benefit of Quarkus CLI is that is shields you from the build system
+that your Quarkus application uses. It works exactly the same both with Maven
+and Gradle projects. So you can stay assured that if you run `quarkus ext add
+rest` it will run exactly the same action in both cases. But with the build tool
+you would need to remember to run:
+
+[source,bash]
+----
+# Maven
+$ ./mvnw quarkus:add-extension -Dextension=rest
+
+# Gradle
+$ ./gradlew addExtension --extensions="rest"
+----
+
+=== Conciseness and shortcuts
+
+One example is worth a 1000 words. Would you rather:
+
+[source,bash]
+----
+$ ./mvnw quarkus:list-extensions -Dall=false -Dcategory="messaging" \
+  -DbomVersion=3.20.0 -DsearchPattern="kafka" -Dformat=full
+----
+
+Or:
+
+[source,bash]
+----
+$ quarkus ext ls -i -P 3.20.0 -c "messaging" -s "kafka" --full
+----
+
+We also have to mention that finding the parameters of the Maven plugin goal
+isn't straightforward since Maven doesn't provide autocompletion. We need to
+manually find the names of the relevant parameters with `./mvnw quarkus:help
+-Ddetail -Dgoal=list-extensions`. However, with Quarkus CLI, the autocompletion
+provided all we had to write.
+
+=== Autocompletion
+
+How was the action (in Maven plugin goal, in Gradle build task) called?
+`quarkusAddExtension` or only `addExtension`? And the parameter? Was it
+`--extension` or `--extensions`? Maybe you have a good memory for these kind of
+things, but many developers don't. And searching for it with the build tools
+autocompletion is not always so easy.
+
+With Quarkus CLI, the full autocompletion ships with the binary. Simply run
+`source <(quarkus completion)` and you can enjoy all commands and parameters at
+the tip of your TAB key:
+
+[source,bash]
+----
+$ quarkus ext ls -[press TAB here]
+-B            --concise  -e        --help         --origins       --registry-client  --stream
+--batch-mode  --config   --errors  -i             -P              -s                 --verbose
+-c            -D         --full    --id           --platform-bom  -S
+--category    --dry-run  -h        --installable  --refresh       --search
+----
+
+== Creating new Quarkus projects
+
+The CLI also allows you to create new projects directly in your terminal:
+
+[source,bash]
+----
+quarkus create app org.acme:quarkus-cli-rocks
+----
+
+But of course you could do the same with Maven or with the graphical generator
+available at https://code.quarkus.io/. However, for Maven, you would need to
+install Maven first (remember that generated Quarkus project ships with built-in
+Maven wrapper that will download the correct Maven version for), or manually
+download and unzip the application generated in the web generator. Isn't it just
+easier to wrap everything in the CLI and let Quarkus take care of all the
+required setups?
+
+There is also no option to generate projects like this with Gradle. But to
+generate Gradle project with the Quarkus CLI, simply append `--gradle` parameter
+when you run the command.
+
+== How can I install the Quarkus CLI?
+
+You can find the installation instruction for all platforms at https://quarkus.io/guides/cli-tooling. But it is usually as simple as:
+
+[source]
+----
+# Unix
+$ sdk install quarkus
+
+# Windows
+PS C:\> choco install quarkus
+----
+
+And verify that you have Quarkus CLI installed with:
+
+[source]
+----
+$ quarkus --version
+3.24.2
+----
+
+== Summary
+
+Quarkus CLI is not black magic. It also not a superpower. It is a tool that
+simplifies your interactions with your Quarkus applications. Is it required? No.
+But it can greatly simplify your Quarkus synergy, especially if you are
+frequently switching between Maven and Gradle. Now you can decide for yourself
+what is your preferred way of working with Quarkus!
